@@ -3,11 +3,12 @@ const EngineCoreContainer = require("./coreContainer");
 const eventBus = require("../event");
 
 class EngineCore {
-    constructor(physics,renderer,schedulerFactory,entityFactory) {
+    constructor(physics,renderer,schedulerFactory,entityFactory,inputFactory) {
         this.physics = physics;
         this.renderer = renderer;
         this.schedulerFactory = schedulerFactory;
         this.entityFactory = entityFactory;
+        this.inputFactory = inputFactory;
         this.gameObjects = [];
         EngineCoreContainer.setCoreInstance(this);
     }
@@ -29,7 +30,7 @@ class EngineCore {
         let playerBodyComponent = this.entityFactory.createPlayerBodyComponent(bodyComponent);
         let cameraComponent = this.renderer.createCameraComponent(bodyComponent);
         let playerComponent = this.entityFactory.createPlayerComponent();
-        let playerInputComponent = this.entityFactory.createPlayerInputComponent();
+        let playerInputComponent = this.inputFactory.createPlayerInputComponent();
         let renderComponent = this.renderer.createPlayerRenderComponent(bodyComponent,playerComponent);
         this.renderer.setActiveCamera(cameraComponent);
         player.attachComponent(playerBodyComponent);
@@ -46,6 +47,7 @@ class EngineCore {
 
     update(delta) {
         this.schedulerFactory.update(delta*1000);
+        this.inputFactory.update(delta);
         this.physics.update(delta);
         this.entityFactory.update(delta);
     }

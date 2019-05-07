@@ -2,6 +2,7 @@ const MainLoop = require("mainloop.js");
 const Physics = require("../common/physics");
 const EngineCore = require("../common/entity/core");
 const SchedulerFactory = require("../common/scheduler/schedulerFactory");
+const InputFactory = require("../common/input/inputFactory");
 const EntityFactory = require("../common/entity/entityFactory");
 
 const PixiRenderer = require("./renderer");
@@ -19,7 +20,8 @@ resourceLoader.loadAllResources().then((resources) => {
         new Physics(),
         renderer,
         new SchedulerFactory(),
-        new EntityFactory());
+        new EntityFactory(),
+        new InputFactory());
     
     engineCore.createStatic(0,550,1000,50);
     engineCore.createStatic(0,0,1000,50);

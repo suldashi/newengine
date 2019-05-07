@@ -40,7 +40,6 @@ class IdleState extends PlayerState {
 
     setAngle(angle) {
         playerStateData.angle = angle;
-        console.log(angle);
         if(angle>90 && angle<270) {
             playerStateData.isOrientedLeft = true;
         }

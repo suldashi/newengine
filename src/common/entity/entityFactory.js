@@ -1,5 +1,4 @@
 const PlayerComponent = require("./player");
-const PlayerInputComponent = require("../input/playerInputComponent");
 const PlayerBodyComponent = require("./player/playerBodyComponent");
 
 class EntityFactory {
@@ -11,12 +10,6 @@ class EntityFactory {
         let playerComponent = new PlayerComponent(inputComponent);
         this.components.push(playerComponent);
         return playerComponent;
-    }
-
-    createPlayerInputComponent(playerComponent) {
-        let playerInputComponent = new PlayerInputComponent(playerComponent);
-        this.components.push(playerInputComponent);
-        return playerInputComponent;
     }
 
     createPlayerBodyComponent(bodyComponent) {

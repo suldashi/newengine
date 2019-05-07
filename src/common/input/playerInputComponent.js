@@ -6,6 +6,7 @@ class PlayerInputComponent {
         this.down = false;
         this.left = false;
         this.right = false;
+        this.updated = false;
         eventBus.on("newInputUp",this.updateUp.bind(this));
         eventBus.on("newInputDown",this.updateDown.bind(this));
         eventBus.on("newInputLeft",this.updateLeft.bind(this));
@@ -14,22 +15,22 @@ class PlayerInputComponent {
 
     updateUp(newUp) {
         this.up = newUp;
-        eventBus.emitEvent("newPlayerControls",this.getInputs());
+        this.updated = true;
     }
 
     updateDown(newDown) {
         this.down = newDown;
-        eventBus.emitEvent("newPlayerControls",this.getInputs());
+        this.updated = true;
     }
 
     updateLeft(newLeft) {
         this.left = newLeft;
-        eventBus.emitEvent("newPlayerControls",this.getInputs());
+        this.updated = true;
     }
 
     updateRight(newRight) {
         this.right = newRight;
-        eventBus.emitEvent("newPlayerControls",this.getInputs());
+        this.updated = true;
     }
 
     getInputs() {
@@ -42,7 +43,12 @@ class PlayerInputComponent {
         return inputs;
     }
 
-    update() { }
+    update() { 
+        if(this.updated) {
+            eventBus.emitEvent("newPlayerControls",this.getInputs());
+            this.updated = false;
+        }
+    }
 }
 
 module.exports = PlayerInputComponent;

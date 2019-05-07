@@ -24,6 +24,7 @@ class PixiRenderer {
         this.activePlayer = null;
         this.parentElement.appendChild(this.app.view);
         this.resources = resources;
+        console.log(this.resources);
     }
 
     createStaticRenderComponent(bodyComponent) {

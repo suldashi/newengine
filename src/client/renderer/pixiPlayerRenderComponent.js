@@ -34,6 +34,7 @@ class PixiPlayerRenderComponent extends RenderComponent {
     playAnimation(spriteName,animationTextures,animationSpeed) {
         this.sheet = this.resources.sheets[this.baseName];
         this.animation = animationTextures;
+        console.log(this.animation);
         this.sprite = new PIXI.AnimatedSprite(this.animation);
         this.sprite.anchor = new PIXI.ObservablePoint(null,null,0.5,0.5);
         this.sprite.scale.x = this.sprite.scale.y = this.scale;

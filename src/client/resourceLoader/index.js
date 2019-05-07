@@ -1,5 +1,6 @@
 let resourceList = require("./resources");
 let config = require("../../common/config");
+const PIXI = require("../renderer/pixi");
 
 class ResourceLoader {
     constructor() {
