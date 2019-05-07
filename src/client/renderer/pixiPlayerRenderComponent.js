@@ -1,5 +1,6 @@
 const RenderComponent = require("./pixiRenderComponent");
 const PIXI = require("./pixi");
+const Vec2 = require("../../common/physics/vec2");
 
 class PixiPlayerRenderComponent extends RenderComponent {
     constructor(bodyComponent,playerComponent,resources,stage) {
@@ -27,14 +28,16 @@ class PixiPlayerRenderComponent extends RenderComponent {
             this.reflected = !this.reflected;
             this.sprite.scale.x*=-1;
         }
-        this.sprite.x = this.bodyComponent.position.x+camera.cameraPosition.x+this.bodyComponent.width/2;
-        this.sprite.y = this.bodyComponent.position.y+camera.cameraPosition.y+this.bodyComponent.height/2;
+        let ap = this.bodyComponent.position.isometric();
+        let ac = camera.cameraPosition.isometric();
+        let as = new Vec2(this.bodyComponent.width,this.bodyComponent.height).isometric();
+        this.sprite.x = ap.x+ac.x+as.x/2;
+        this.sprite.y = ap.y+ac.y-this.bodyComponent.width*Math.sqrt(2);
     }
 
-    playAnimation(spriteName,animationTextures,animationSpeed) {
+    playAnimation(animationTextures,animationSpeed) {
         this.sheet = this.resources.sheets[this.baseName];
         this.animation = animationTextures;
-        console.log(this.animation);
         this.sprite = new PIXI.AnimatedSprite(this.animation);
         this.sprite.anchor = new PIXI.ObservablePoint(null,null,0.5,0.5);
         this.sprite.scale.x = this.sprite.scale.y = this.scale;
@@ -55,10 +58,10 @@ class PixiPlayerRenderComponent extends RenderComponent {
         this.sheet = this.resources.sheets[this.baseName];
         let isAnimation = typeof this.resources.animations[spriteName] !== "undefined";
         if(isAnimation) {
-            this.playAnimation(this.spriteName,this.sheet.sheet.animations[spriteName],this.resources.animations[spriteName].speed);
+            this.playAnimation(this.sheet.sheet.animations[spriteName],this.resources.animations[spriteName].speed);
         }   
         else {
-            this.playAnimation(this.spriteName,[this.resources.images[spriteName].texture],1);
+            this.playAnimation([this.resources.images[spriteName].texture],1);
         }
     }
 

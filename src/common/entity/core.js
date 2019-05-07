@@ -13,6 +13,13 @@ class EngineCore {
         EngineCoreContainer.setCoreInstance(this);
     }
 
+    createCornerText() {
+        let textObject = new GameObject();
+        let textComponent = this.renderer.createTextComponent();
+        textObject.attachComponent(textComponent);
+        this.gameObjects.push(textObject);
+    }
+
     createStatic(x,y,w,h) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createBodyComponent(x,y,w,h);
@@ -24,8 +31,8 @@ class EngineCore {
 
     createPlayer(x,y) {
         let player = new GameObject();
-        let w = 32;
-        let h = 48;
+        let w = 20;
+        let h = 20;
         let bodyComponent = this.physics.createBodyComponent(x,y,w,h);
         let playerBodyComponent = this.entityFactory.createPlayerBodyComponent(bodyComponent);
         let cameraComponent = this.renderer.createCameraComponent(bodyComponent);

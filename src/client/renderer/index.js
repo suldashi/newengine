@@ -3,6 +3,7 @@ const CameraComponent = require("./cameraComponent");
 const BodyCameraComponent = require("./bodyCameraComponent");
 const PixiStaticRenderComponent = require("./pixiStaticRenderComponent");
 const PixiPlayerRenderComponent = require("./pixiPlayerRenderComponent");
+const PixiTextComponent = require("./pixiTextComponent");
 const Vec2 = require("../../common/physics/vec2");
 const eventBus = require("../../common/event");
 
@@ -18,13 +19,16 @@ class PixiRenderer {
         this.app.renderer.backgroundColor = 0xFFFFFF;
         this.graphics = new PIXI.Graphics();
         this.app.stage.addChild(this.graphics);
+        this.app.stage.stageData = {
+            width: this.width,
+            height: this.height
+        }
         this.activeCamera = new CameraComponent(0,0);
         this.screenCenter = new Vec2(this.width/2,this.height/2);
         this.renderComponents = [];
         this.activePlayer = null;
         this.parentElement.appendChild(this.app.view);
         this.resources = resources;
-        console.log(this.resources);
     }
 
     createStaticRenderComponent(bodyComponent) {
@@ -35,6 +39,12 @@ class PixiRenderer {
 
     createPlayerRenderComponent(bodyComponent,playerComponent) {
         let renderComponent = new PixiPlayerRenderComponent(bodyComponent,playerComponent,this.resources,this.app.stage);
+        this.renderComponents.push(renderComponent);
+        return renderComponent;
+    }
+
+    createTextComponent() {
+        let renderComponent = new PixiTextComponent(this.app.stage);
         this.renderComponents.push(renderComponent);
         return renderComponent;
     }

@@ -21,14 +21,17 @@ resourceLoader.loadAllResources().then((resources) => {
         renderer,
         new SchedulerFactory(),
         new EntityFactory(),
-        new InputFactory());
+        new InputFactory()
+    );
     
-    engineCore.createStatic(0,550,1000,50);
-    engineCore.createStatic(0,0,1000,50);
-    engineCore.createStatic(0,50,50,500);
-    engineCore.createStatic(950,50,50,500);
+    for(var i=0;i<10;i++) {
+        for(var j=0;j<10;j++) {
+            engineCore.createStatic(i*40,j*40,20,20);        
+        }
+    }
     
-    engineCore.createPlayer(100,400);
+    engineCore.createPlayer(10,10);
+    engineCore.createCornerText();
     
     MainLoop.setUpdate((delta) => {
         let scaledDelta = delta/1000;

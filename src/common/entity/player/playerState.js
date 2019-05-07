@@ -1,12 +1,12 @@
 let playerStateData = {
-    angle:0,
+    angle:"N",
     isOrientedLeft:false,
 }
 
 class PlayerState {
     constructor(playerObject) {
         this.playerObject = playerObject;
-        this.sprite = "idle0";
+        this.sprite = "idle_n";
     }
 
     switchState(newState) {
@@ -15,7 +15,7 @@ class PlayerState {
 
     setAngle(angle) {
         playerStateData.angle = angle;
-        if(angle>=90 && angle<=270) {
+        if(angle === "S" || angle === "SW" || angle === "W") {
             playerStateData.isOrientedLeft = true;
         }
         else {
@@ -40,26 +40,26 @@ class IdleState extends PlayerState {
 
     setAngle(angle) {
         playerStateData.angle = angle;
-        if(angle>90 && angle<270) {
+        if(angle === "S" || angle === "SW" || angle === "W") {
             playerStateData.isOrientedLeft = true;
         }
         else {
             playerStateData.isOrientedLeft = false;
         }
-        if(angle==45 || angle==135) {
-            this.sprite = "idle45";
+        if(angle=="N" || angle=="W") {
+            this.sprite = "idle_n";
         }
-        else if(angle==315 || angle==225) {
-            this.sprite = "idle315";
+        else if(angle=="NW") {
+            this.sprite = "idle_nw";
         }
-        else if(angle==270) {
-            this.sprite = "idle270";
+        else if(angle=="NE" || angle=="SW") {
+            this.sprite = "idle_ne";
         }
-        else if(angle==90) {
-            this.sprite = "idle90";
+        else if(angle=="E" || angle=="S") {
+            this.sprite = "idle_e";
         }
         else {
-            this.sprite = "idle0";
+            this.sprite = "idle_se"
         }
     }
 }
@@ -67,28 +67,31 @@ class IdleState extends PlayerState {
 class RunningState extends PlayerState {
     constructor(playerObject) {
         super(playerObject);
-        this.sprite = "run0";
+        this.sprite = "run_n";
     }
 
     setAngle(angle) {
         playerStateData.angle = angle;
-        if(angle>90 && angle<270) {
+        if(angle === "S" || angle === "SW" || angle === "W") {
             playerStateData.isOrientedLeft = true;
         }
         else {
             playerStateData.isOrientedLeft = false;
         }
-        if(angle==45 || angle==135) {
-            this.sprite = "run45";
+        if(angle=="N" || angle=="W") {
+            this.sprite = "run_n";
         }
-        else if(angle==315 || angle==225) {
-            this.sprite = "run315";
+        else if(angle=="NW") {
+            this.sprite = "run_nw";
         }
-        else if(angle==270) {
-            this.sprite = "run270";
+        else if(angle=="NE" || angle=="SW") {
+            this.sprite = "run_ne";
         }
-        else if(angle==90) {
-            this.sprite = "run90";
+        else if(angle=="E" || angle=="S") {
+            this.sprite = "run_e";
+        }
+        else {
+            this.sprite = "run_se"
         }
     }
 }

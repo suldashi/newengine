@@ -1,18 +1,18 @@
 module.exports = {
     images: {
-        idle0: {
+        idle_n: {
             baseName:"run"
         },
-        idle45: {
+        idle_nw: {
             baseName:"run"
         },
-        idle90: {
+        idle_ne: {
             baseName:"run"
         },
-        idle270: {
+        idle_e: {
             baseName:"run"
         },
-        idle315: {
+        idle_se: {
             baseName:"run"
         }
     },
@@ -26,32 +26,32 @@ module.exports = {
     animations: [
         {
             baseName:"run",
-            name:"run0",
-            frames:["run0_1","run0_2","run0_3","run0_4","run0_5","run0_6"],
+            name:"run_n",
+            frames:["run_n_1","run_n_2","run_n_3","run_n_4","run_n_5","run_n_6"],
             speed:1/6
         },
         {
             baseName:"run",
-            name:"run45",
-            frames:["run45_1","run45_2","run45_3","run45_4","run45_5","run45_6"],
+            name:"run_nw",
+            frames:["run_nw_1","run_nw_2","run_nw_3","run_nw_4","run_nw_5","run_nw_6"],
             speed:1/6
         },
         {
             baseName:"run",
-            name:"run315",
-            frames:["run315_1","run315_2","run315_3","run315_4","run315_5","run315_6"],
+            name:"run_ne",
+            frames:["run_ne_1","run_ne_2","run_ne_3","run_ne_4","run_ne_5","run_ne_6"],
             speed:1/6
         },
         {
             baseName:"run",
-            name:"run270",
-            frames:["run270_1","run270_2","run270_3","run270_4","run270_5","run270_6"],
+            name:"run_e",
+            frames:["run_e_1","run_e_2","run_e_3","run_e_4","run_e_5","run_e_6"],
             speed:1/6
         },
         {
             baseName:"run",
-            name:"run90",
-            frames:["run90_1","run90_2","run90_3","run90_4","run90_5","run90_6"],
+            name:"run_se",
+            frames:["run_se_1","run_se_2","run_se_3","run_se_4","run_se_5","run_se_6"],
             speed:1/6
         },
     ]

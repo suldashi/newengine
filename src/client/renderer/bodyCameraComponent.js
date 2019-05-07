@@ -7,7 +7,7 @@ class BodyCameraComponent {
     }
 
     negateAndMove(newPosition) {
-        this.cameraPosition = this.cameraPosition.neg().add(newPosition);
+        this.cameraPosition = this.cameraPosition.neg().add(newPosition.inverseIsometric());
         return this;
     }
 

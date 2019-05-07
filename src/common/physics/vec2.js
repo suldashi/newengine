@@ -9,6 +9,14 @@ class Vec2 {
         return new Vec2(this.x+otherVec.x,this.y+otherVec.y);
     }
 
+    addX(scalar) {
+        return new Vec2(this.x+scalar,this.y);
+    }
+
+    addY(scalar) {
+        return new Vec2(this.x,this.y + scalar);
+    }
+
     subtract(otherVec) {
         return new Vec2(this.x-otherVec.x,this.y-otherVec.y);
     }
@@ -55,8 +63,16 @@ class Vec2 {
         return this.rotate(angleInRad);
     }
 
-    matrix(x11,x12,x21,x22) {
-        return new Vec2(this.x*x11+this.y*x12,this.x*x21+this.y*x22);
+    matrix(x11,x21,x12,x22) {
+        return new Vec2(this.x*x11+this.y*x21,this.x*x12+this.y*x22);
+    }
+
+    isometric() {
+        return this.matrix(1,-1,0.5,0.5);
+    }
+
+    inverseIsometric() {
+        return this.matrix(0.5,1,-0.5,1);
     }
 
     rotate(angleInRad) {

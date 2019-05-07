@@ -42,28 +42,28 @@ class PlayerComponent {
 
     getAngle(inputs) {
         if(inputs.up && inputs.left && !inputs.right) {
-            return 135;
+            return "W";
         }
         else if(inputs.up && inputs.right && !inputs.left) {
-            return 45;
+            return "N";
         }
         else if(inputs.down && inputs.right && !inputs.left) {
-            return 315;
+            return "E";
         }
         else if(inputs.down && inputs.left && !inputs.right) {
-            return 225;
+            return "S";
         }
         else if(inputs.down && !(inputs.left ^ inputs.right)) {
-            return 270;
+            return "SE";
         }
         else if(inputs.up && !(inputs.left ^ inputs.right)) {
-            return 90;
+            return "NW";
         }
         else if(inputs.left && !(inputs.up ^ inputs.down)) {
-            return 180;
+            return "SW";
         }
         else if(inputs.right && !(inputs.up ^ inputs.down)) {
-            return 0;
+            return "NE";
         }
     }
 
