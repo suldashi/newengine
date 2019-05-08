@@ -69,10 +69,14 @@ class Vec2 {
 
     isometric() {
         return this.matrix(1,-1,0.5,0.5);
+        // same thing as below
+        //return this.rotateDeg(-45).matrix(1,0,0,0.5).scale(Math.sqrt(2));
     }
 
     inverseIsometric() {
         return this.matrix(0.5,1,-0.5,1);
+        // same thing as below
+        //return this.scale(1/Math.sqrt(2)).matrix(1,0,0,2).rotateDeg(45);
     }
 
     rotate(angleInRad) {

@@ -1,6 +1,6 @@
 const Vec2 = require("../../common/physics/vec2");
 
-class BodyCameraComponent {
+class InverseIsometricBodyCameraComponent {
     constructor(bodyComponent) {
         this.bodyComponent = bodyComponent;
         this.cameraPosition = this.bodyComponent.position.copy();
@@ -18,4 +18,4 @@ class BodyCameraComponent {
     
 }
 
-module.exports = BodyCameraComponent;
+module.exports = InverseIsometricBodyCameraComponent;

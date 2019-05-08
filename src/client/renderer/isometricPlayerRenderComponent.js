@@ -1,8 +1,8 @@
-const RenderComponent = require("./pixiRenderComponent");
+const RenderComponent = require("./renderComponent");
 const PIXI = require("./pixi");
 const Vec2 = require("../../common/physics/vec2");
 
-class PixiPlayerRenderComponent extends RenderComponent {
+class IsometricPlayerRenderComponent extends RenderComponent {
     constructor(bodyComponent,playerComponent,resources,stage) {
         super();
         this.bodyComponent = bodyComponent;
@@ -70,4 +70,4 @@ class PixiPlayerRenderComponent extends RenderComponent {
     }
 }
 
-module.exports = PixiPlayerRenderComponent;
+module.exports = IsometricPlayerRenderComponent;

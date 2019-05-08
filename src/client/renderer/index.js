@@ -1,9 +1,9 @@
 const PIXI = require("./pixi");
 const CameraComponent = require("./cameraComponent");
-const BodyCameraComponent = require("./bodyCameraComponent");
-const PixiStaticRenderComponent = require("./pixiStaticRenderComponent");
-const PixiPlayerRenderComponent = require("./pixiPlayerRenderComponent");
-const PixiTextComponent = require("./pixiTextComponent");
+const InverseIsometricBodyCameraComponent = require("./inverseIsometricBodyCameraComponent");
+const IsometricStaticRenderComponent = require("./isometricStaticRenderComponent");
+const IsometricPlayerRenderComponent = require("./isometricPlayerRenderComponent");
+const TextComponent = require("./textComponent");
 const Vec2 = require("../../common/physics/vec2");
 const eventBus = require("../../common/event");
 
@@ -32,25 +32,25 @@ class PixiRenderer {
     }
 
     createStaticRenderComponent(bodyComponent) {
-        let renderComponent = new PixiStaticRenderComponent(bodyComponent);
+        let renderComponent = new IsometricStaticRenderComponent(bodyComponent);
         this.renderComponents.push(renderComponent);
         return renderComponent;
     }
 
     createPlayerRenderComponent(bodyComponent,playerComponent) {
-        let renderComponent = new PixiPlayerRenderComponent(bodyComponent,playerComponent,this.resources,this.app.stage);
+        let renderComponent = new IsometricPlayerRenderComponent(bodyComponent,playerComponent,this.resources,this.app.stage);
         this.renderComponents.push(renderComponent);
         return renderComponent;
     }
 
     createTextComponent() {
-        let renderComponent = new PixiTextComponent(this.app.stage);
+        let renderComponent = new TextComponent(this.app.stage);
         this.renderComponents.push(renderComponent);
         return renderComponent;
     }
 
     createCameraComponent(bodyComponent) {
-        return new BodyCameraComponent(bodyComponent);
+        return new InverseIsometricBodyCameraComponent(bodyComponent);
     }
 
     setActiveCamera(cameraComponent) {

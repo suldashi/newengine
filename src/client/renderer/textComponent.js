@@ -1,8 +1,8 @@
-const RenderComponent = require("./pixiRenderComponent");
+const RenderComponent = require("./renderComponent");
 const PIXI = require("./pixi");
 const event = require("../../common/event");
 
-class PixiTextComponent extends RenderComponent {
+class TextComponent extends RenderComponent {
     constructor(stage) {
         super();
         this.stage = stage;
@@ -24,4 +24,4 @@ class PixiTextComponent extends RenderComponent {
     }
 }
 
-module.exports = PixiTextComponent;
+module.exports = TextComponent;

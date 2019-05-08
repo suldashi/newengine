@@ -1,8 +1,8 @@
-class PixiRenderComponent {
+class RenderComponent {
     constructor() {}
 
     update(graphics,stage,camera) {
     }
 }
 
-module.exports = PixiRenderComponent;
+module.exports = RenderComponent;

@@ -1,14 +1,15 @@
-const PixiRenderComponent = require("./pixiRenderComponent");
+const RenderComponent = require("./renderComponent");
 const Vec2 = require("../../common/physics/vec2");
 
-class PixiStaticRenderComponent extends PixiRenderComponent {
+class IsometricStaticRenderComponent extends RenderComponent {
     constructor(bodyComponent) {
         super();
         this.bodyComponent = bodyComponent;
+        this.color = 0xFF0000;
     }
 
     update(graphics,stage,camera) {
-        graphics.beginFill(0x0);    //black
+        graphics.beginFill(this.color);    //black
         let isometric = this.bodyComponent.position.isometric();
         let w = this.bodyComponent.width;
         let h = this.bodyComponent.height;
@@ -25,4 +26,4 @@ class PixiStaticRenderComponent extends PixiRenderComponent {
     }
 }
 
-module.exports = PixiStaticRenderComponent;
+module.exports = IsometricStaticRenderComponent;
