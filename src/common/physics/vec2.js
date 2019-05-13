@@ -10,7 +10,7 @@ class Vec2 {
     }
 
     addX(scalar) {
-        return new Vec2(this.x+scalar,this.y);
+        return new Vec2(this.x + scalar,this.y);
     }
 
     addY(scalar) {
@@ -51,18 +51,43 @@ class Vec2 {
     }
 
     normalize() {
-        return new Vec2(this.x/this.magnitude(),this.y/this.magnitude());
+        let magnitude = this.magnitude();
+        return new Vec2(this.x/magnitude,this.y/magnitude);
+    }
+
+    normal() {
+        let magnitude = this.magnitude();
+        if(magnitude == 0) {
+            return new Vec2(0,0);
+        }
+        if(this.x===0) {
+            return new Vec2(-this.y/magnitude,this.x/magnitude);
+        }
+        else {
+            return new Vec2(this.y/magnitude,-this.x/magnitude);
+        }
     }
 
     dot(otherVector) {
         return this.x*otherVector.x+this.y*otherVector.y;
     }
 
+    get angle() {
+        return Math.atan2(this.y,this.x);
+    }
+
     rotateDeg(angleInDeg) {
         let angleInRad = Math.PI*angleInDeg/180;
         return this.rotate(angleInRad);
     }
-
+    /**
+     * Multiplies this vector with a 2x2 matrix
+     * @param {number} x11 the top-left number in a 2x2 matrix
+     * @param {number} x21 the top-right number in a 2x2 matrix
+     * @param {number} x12 the bottom-left number in a 2x2 matrix
+     * @param {number} x22 the bottom-right number in a 2x2 matrix
+     * @returns {Vec2} the resulting vector after the matrix multiplication
+     */
     matrix(x11,x21,x12,x22) {
         return new Vec2(this.x*x11+this.y*x21,this.x*x12+this.y*x22);
     }
@@ -80,8 +105,10 @@ class Vec2 {
     }
 
     rotate(angleInRad) {
-        return this.matrix(Math.cos(angleInRad),Math.sin(angleInRad),-Math.sin(angleInRad),Math.cos(angleInRad));
+        let cos = Math.cos(angleInRad);
+        let sin = Math.sin(angleInRad);
+        return this.matrix(cos,sin,-sin,cos);
     }
 }
-
+window.Vec2 = Vec2;
 module.exports = Vec2;

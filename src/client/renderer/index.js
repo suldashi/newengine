@@ -4,6 +4,7 @@ const InverseIsometricBodyCameraComponent = require("./inverseIsometricBodyCamer
 const IsometricStaticRenderComponent = require("./isometricStaticRenderComponent");
 const IsometricPlayerRenderComponent = require("./isometricPlayerRenderComponent");
 const TextComponent = require("./textComponent");
+const PolygonRenderComponent = require("./polygonRenderComponent");
 const Vec2 = require("../../common/physics/vec2");
 const eventBus = require("../../common/event");
 
@@ -39,6 +40,12 @@ class PixiRenderer {
 
     createPlayerRenderComponent(bodyComponent,playerComponent) {
         let renderComponent = new IsometricPlayerRenderComponent(bodyComponent,playerComponent,this.resources,this.app.stage);
+        this.renderComponents.push(renderComponent);
+        return renderComponent;
+    }
+
+    createPolygonRenderComponent(polygonComponent) {
+        let renderComponent = new PolygonRenderComponent(polygonComponent);
         this.renderComponents.push(renderComponent);
         return renderComponent;
     }

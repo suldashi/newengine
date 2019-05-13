@@ -47,6 +47,30 @@ class EngineCore {
         this.gameObjects.push(player);
     }
 
+    createTriangle(x,y) {
+        let triangle = new GameObject();
+        let bodyComponent = this.physics.createTriangleComponent(x,y);
+        let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
+        let playerInputComponent = this.inputFactory.createPlayerInputComponent();
+        let controlComponent = this.entityFactory.createPlayerPolygonComponent(bodyComponent);
+        let polygonRotationComponent = this.physics.createPolygonRotationComponent(bodyComponent);
+        triangle.attachComponent(bodyComponent);
+        triangle.attachComponent(renderComponent);
+        triangle.attachComponent(controlComponent);
+        triangle.attachComponent(playerInputComponent);
+        triangle.attachComponent(polygonRotationComponent);
+        this.gameObjects.push(triangle);
+    }
+
+    createStaticTriangle(x,y) {
+        let triangle = new GameObject();
+        let bodyComponent = this.physics.createTriangleComponent(x,y);
+        let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
+        triangle.attachComponent(bodyComponent);
+        triangle.attachComponent(renderComponent);
+        this.gameObjects.push(triangle);
+    }
+
     createScheduler() {
         let scheduler = this.schedulerFactory.createScheduler();
         return scheduler;
