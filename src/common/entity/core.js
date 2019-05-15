@@ -53,12 +53,12 @@ class EngineCore {
         let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
         let playerInputComponent = this.inputFactory.createPlayerInputComponent();
         let controlComponent = this.entityFactory.createPlayerPolygonComponent(bodyComponent);
-        let polygonRotationComponent = this.physics.createPolygonRotationComponent(bodyComponent);
+        //let polygonRotationComponent = this.physics.createPolygonRotationComponent(bodyComponent);
         triangle.attachComponent(bodyComponent);
         triangle.attachComponent(renderComponent);
         triangle.attachComponent(controlComponent);
         triangle.attachComponent(playerInputComponent);
-        triangle.attachComponent(polygonRotationComponent);
+        //triangle.attachComponent(polygonRotationComponent);
         this.gameObjects.push(triangle);
     }
 

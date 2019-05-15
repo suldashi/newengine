@@ -2,14 +2,12 @@ const Vec2 = require("./vec2");
 const GameObjectBody = require("./gameObjectBody");
 const PolygonBodyComponent = require("./polygonBodyComponent");
 const PolygonRotationComponent = require("./polygonRotationComponent");
-const Utils = require("../utils");
 
 class Physics {
 
     constructor() {
         this.bodies = [];
         this.collidingBodies = [];
-        this.gravity = new Vec2(0,1000);
     }
 
     createBodyComponent(x,y,width,height) {
@@ -36,7 +34,10 @@ class Physics {
     checkCollisionPairs() {
         for(var i=0;i<this.collidingBodies.length-1;i++) {
             for(var j=i+1;j<this.collidingBodies.length;j++) {
-                console.log(this.checkCollision(this.collidingBodies[i],this.collidingBodies[j]));
+                let collision = this.checkCollision(this.collidingBodies[i],this.collidingBodies[j]);
+                if(collision) {
+                    this.collidingBodies[i].points = this.collidingBodies[i].points.map(x => x.add(collision));
+                }
             }
         }
     }
@@ -47,25 +48,39 @@ class Physics {
         let n2 = this.getNormalAxes(p2.points);
         let allNormals = n1.concat(n2);
         for(var k in allNormals) {
+            let normalAngle = -allNormals[k].angle;
             let projected1 = this.projectPolygonToAxis(allNormals[k],p1.points);
             let projected2 = this.projectPolygonToAxis(allNormals[k],p2.points);
-            let rotated1 = this.rotateAndCombine(-allNormals[k].angle,projected1);
-            let rotated2 = this.rotateAndCombine(-allNormals[k].angle,projected2);
+            let rotated1 = this.rotateAndCombine(normalAngle,projected1);
+            let rotated2 = this.rotateAndCombine(normalAngle,projected2);
             if(rotated1[0]>rotated2[0]) {
                 let tmp = rotated1;
                 rotated1=rotated2;
                 rotated2=tmp;
             }
             if(rotated1[1]<rotated2[0]) {
-                measure.push(false);
+                measure.push(0);
             }
             else {
-                measure.push(true);
+                measure.push(rotated1[1]-rotated2[0]);
             }
             
         }
-        let combined = measure.reduce((prev,curr) => prev&curr,true);
-        return combined;
+        //let combined = measure.reduce((prev,curr,index) => curr>0?&curr,-1);
+        let smallestIndex = -1;
+        let smallestValue = 1e10;   //should be big enough for our uses
+        for(var i in measure) {
+            if(measure[i]<smallestValue) {
+                smallestIndex = i;
+                smallestValue = measure[i];
+            }
+        }
+        if(smallestValue==0) {
+            return null;
+        }
+        else {
+            return allNormals[smallestIndex].scale(smallestValue);
+        }
     }
 
     rotateAndCombine(angle,pointArray) {
