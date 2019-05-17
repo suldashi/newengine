@@ -17,37 +17,5 @@
 	</div>
 	<script src="/public/js/pixi/pixi.min.js"></script>
 	<script src="/public/js/engine.js"></script>
-	<script>
-		let t1 = [new Vec2(1,1),new Vec2(5,1),new Vec2(3,4)];
-		let t2 = [new Vec2(1,3),new Vec2(5,3),new Vec2(3,5)];
-
-		function getAxes(polygon) {
-			let axes = [];
-			for(var i=1;i<polygon.length;i++) {
-				axes.push(polygon[i].subtract(polygon[i-1]));
-			}
-			axes.push(polygon[0].subtract(polygon[polygon.length-1]));
-			return axes.map(x => x.normal());
-		}
-
-		function projectPolygonToAxis(axis,polygon) {
-			if(axis.x === 0) {
-				return polygon.map(el => new Vec2(0,el.y));
-			}
-			else if(axis.y === 0) {
-				return polygon.map(el => new Vec2(el.x,0));
-			}
-			else {
-				let slope = axis.y/axis.x;
-				return polygon.map(point => {
-					let b = point.y+slope*point.x;
-					return new Vec2(b/(2*slope),b/2);
-				});
-			}
-		}
-		let axes = getAxes(t1);
-		let projections = projectPolygonToAxis(axes[1],t1);
-		let rotatedProjections = projections.map(x => x.rotate(x.angle));
-	</script>
 </body>
 </html>
