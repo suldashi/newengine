@@ -3,9 +3,7 @@ module.exports = checkCollision;
 function checkCollision(p1,p2) {
     let smallestIndex = -1;
     let smallestValue = Number.MAX_VALUE;
-    let n1 = getNormalAxes(p1.points);
-    let n2 = getNormalAxes(p2.points);
-    let allNormals = n1.concat(n2);
+    let allNormals = [...getNormalAxes(p1.points),...getNormalAxes(p2.points)]
     for(var i in allNormals) {
         let projected1 = projectPolygonToAxis(allNormals[i],p1.points);
         let projected2 = projectPolygonToAxis(allNormals[i],p2.points);

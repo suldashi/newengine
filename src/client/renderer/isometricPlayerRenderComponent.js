@@ -30,9 +30,8 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         }
         let ap = this.bodyComponent.position.isometric();
         let ac = camera.cameraPosition.isometric();
-        let as = new Vec2(this.bodyComponent.width,this.bodyComponent.height).isometric();
-        this.sprite.x = ap.x+ac.x+as.x/2;
-        this.sprite.y = ap.y+ac.y-this.bodyComponent.width*Math.sqrt(2);
+        this.sprite.x = ap.x+ac.x;
+        this.sprite.y = ap.y+ac.y;
     }
 
     playAnimation(animationTextures,animationSpeed) {

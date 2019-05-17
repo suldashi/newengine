@@ -1,5 +1,4 @@
 const Vec2 = require("./vec2");
-const GameObjectBody = require("./gameObjectBody");
 const PolygonBodyComponent = require("./polygonBodyComponent");
 const PolygonRotationComponent = require("./polygonRotationComponent");
 const checkCollision = require("./satCollisionChecker");
@@ -12,17 +11,18 @@ class Physics {
     }
 
     createBodyComponent(x,y,width,height) {
-        let initialPos = new Vec2(x,y);
-        let body = new GameObjectBody(initialPos,width,height);
+        let body = new PolygonBodyComponent([new Vec2(x,y),new Vec2(x+width,y),new Vec2(x+width,y+height),new Vec2(x,y+height)]);
         this.bodies.push(body);
-        this.collidingBodies.push(body);
+        //this.collidingBodies.push(body);
         return body;
     }
 
-    createTriangleComponent(x,y) {
-        let body = new PolygonBodyComponent([new Vec2(x,y),new Vec2(x+200,y),new Vec2(x+100,y+141)]);
+    createTriangleComponent(x,y,h) {
+        let hRot = new Vec2(0,-h);
+        let center = new Vec2(x,y);
+        let body = new PolygonBodyComponent([center.add(hRot),center.add(hRot.rotateDeg(120)),center.add(hRot.rotateDeg(240))]);
         this.bodies.push(body);
-        this.collidingBodies.push(body); 
+        //this.collidingBodies.push(body); 
         return body;
     }
 

@@ -23,9 +23,11 @@ class EngineCore {
     createStatic(x,y,w,h) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createBodyComponent(x,y,w,h);
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent);
+        let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
+        let polygonRotationComponent = this.physics.createPolygonRotationComponent(bodyComponent);
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
+        staticObject.attachComponent(polygonRotationComponent);
         this.gameObjects.push(staticObject);
     }
 
@@ -39,35 +41,24 @@ class EngineCore {
         let playerComponent = this.entityFactory.createPlayerComponent();
         let playerInputComponent = this.inputFactory.createPlayerInputComponent();
         let renderComponent = this.renderer.createPlayerRenderComponent(bodyComponent,playerComponent);
+        //let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent);
         this.renderer.setActiveCamera(cameraComponent);
         player.attachComponent(playerBodyComponent);
+        player.attachComponent(playerComponent);
         player.attachComponent(cameraComponent);
         player.attachComponent(renderComponent);
         player.attachComponent(playerInputComponent);
         this.gameObjects.push(player);
     }
 
-    createTriangle(x,y) {
+    createStaticTriangle(x,y,h) {
         let triangle = new GameObject();
-        let bodyComponent = this.physics.createTriangleComponent(x,y);
+        let bodyComponent = this.physics.createTriangleComponent(x,y,h);
         let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
-        let playerInputComponent = this.inputFactory.createPlayerInputComponent();
-        let controlComponent = this.entityFactory.createPlayerPolygonComponent(bodyComponent);
-        //let polygonRotationComponent = this.physics.createPolygonRotationComponent(bodyComponent);
+        let polygonRotationComponent = this.physics.createPolygonRotationComponent(bodyComponent);
         triangle.attachComponent(bodyComponent);
         triangle.attachComponent(renderComponent);
-        triangle.attachComponent(controlComponent);
-        triangle.attachComponent(playerInputComponent);
-        //triangle.attachComponent(polygonRotationComponent);
-        this.gameObjects.push(triangle);
-    }
-
-    createStaticTriangle(x,y) {
-        let triangle = new GameObject();
-        let bodyComponent = this.physics.createTriangleComponent(x,y);
-        let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
-        triangle.attachComponent(bodyComponent);
-        triangle.attachComponent(renderComponent);
+        triangle.attachComponent(polygonRotationComponent);
         this.gameObjects.push(triangle);
     }
 
