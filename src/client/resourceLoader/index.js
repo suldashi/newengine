@@ -41,6 +41,8 @@ class ResourceLoader {
         let sheet = this.resources.sheets[baseName];
         this.resources.images[imageName] = {
             baseName,
+            offsetX:imageResource.offsetX?imageResource.offsetX:0,
+            offsetY:imageResource.offsetY?imageResource.offsetY:0,
             texture: sheet.sheet.textures[`${imageName}.png`]
         };
     }
@@ -58,7 +60,9 @@ class ResourceLoader {
 
     loadAllAnimations() {
         for(var i in resourceList.animations) {
-            this.resources.animations[resourceList.animations[i].name] = resourceList.animations[i];
+            let anim = this.resources.animations[resourceList.animations[i].name] = resourceList.animations[i];
+            anim.offsetX = resourceList.animations[i].offsetX?resourceList.animations[i].offsetX:0;
+            anim.offsetY = resourceList.animations[i].offsetY?resourceList.animations[i].offsetY:0;
         }
     }
 

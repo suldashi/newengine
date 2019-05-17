@@ -23,15 +23,17 @@ resourceLoader.loadAllResources().then((resources) => {
         new EntityFactory(),
         new InputFactory()
     );
-    
-    
-    for(var i=0;i<10;i++) {
-        for(var j=0;j<10;j++) {
-            engineCore.createStatic(i*40,j*40,20,20);        
-        }
-    }
-    
+    engineCore.createFloor(0,0);
+    engineCore.createFloor(128,0);
+    engineCore.createFloor(128,128);
+    engineCore.createFloor(128,256);
+    engineCore.createFloor(256,256);
+    engineCore.createBlock(-128,-128);
+    engineCore.createBlock(-128,0);
+    engineCore.createBlock(0,-128);
+    engineCore.createBlock(128,-128);
     engineCore.createPlayer(0,0);
+    
     engineCore.createCornerText();
     //engineCore.createStaticTriangle(190,190,10);
     

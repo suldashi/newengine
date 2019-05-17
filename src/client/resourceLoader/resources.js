@@ -14,6 +14,13 @@ module.exports = {
         },
         idle_se: {
             baseName:"run"
+        },
+        floor_N: {
+            baseName:"floor"
+        },
+        block_N: {
+            baseName:"floor",
+            offsetY:-78,
         }
     },
     sheets: 
@@ -21,6 +28,10 @@ module.exports = {
         run:{
             url:"run.png",
             data:"run.json"
+        },
+        floor: {
+            url:"floor.png",
+            data:"floor.json",
         }
     },
     animations: [
@@ -28,7 +39,7 @@ module.exports = {
             baseName:"run",
             name:"run_n",
             frames:["run_n_1","run_n_2","run_n_3","run_n_4","run_n_5","run_n_6"],
-            speed:1/6
+            speed:1/6,
         },
         {
             baseName:"run",

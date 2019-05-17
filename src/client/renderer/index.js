@@ -3,9 +3,10 @@ const CameraComponent = require("./cameraComponent");
 const InverseIsometricBodyCameraComponent = require("./inverseIsometricBodyCameraComponent");
 const IsometricPolygonRenderComponent = require("./isometricPolygonRenderComponent");
 const IsometricPlayerRenderComponent = require("./isometricPlayerRenderComponent");
+const IsometricStaticRenderComponent = require("./isometricStaticRenderComponent");
 const TextComponent = require("./textComponent");
 const Vec2 = require("../../common/physics/vec2");
-const eventBus = require("../../common/event");
+const config = require("../../common/config");
 
 PIXI.utils.skipHello();
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
@@ -13,8 +14,8 @@ PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 class PixiRenderer {
     constructor(resources) {
         this.parentElement = document.getElementById("root");
-        this.width = 800;
-        this.height = 480;
+        this.width = config.hres;
+        this.height = config.vres;
         this.app = new PIXI.Application({width: this.width, height: this.height});
         this.app.renderer.backgroundColor = 0xFFFFFF;
         this.graphics = new PIXI.Graphics();
@@ -33,6 +34,12 @@ class PixiRenderer {
 
     createPolygonRenderComponent(bodyComponent) {
         let renderComponent = new IsometricPolygonRenderComponent(bodyComponent);
+        this.renderComponents.push(renderComponent);
+        return renderComponent;
+    }
+
+    createStaticRenderComponent(bodyComponent,isFloor) {
+        let renderComponent = new IsometricStaticRenderComponent(bodyComponent,this.resources,this.app.stage,isFloor);
         this.renderComponents.push(renderComponent);
         return renderComponent;
     }

@@ -1,5 +1,6 @@
 const Vec2 = require("./vec2");
 const PolygonBodyComponent = require("./polygonBodyComponent");
+const PointBodyComponent = require("./pointBodyComponent");
 const PolygonRotationComponent = require("./polygonRotationComponent");
 const checkCollision = require("./satCollisionChecker");
 
@@ -12,6 +13,13 @@ class Physics {
 
     createBodyComponent(x,y,width,height) {
         let body = new PolygonBodyComponent([new Vec2(x,y),new Vec2(x+width,y),new Vec2(x+width,y+height),new Vec2(x,y+height)]);
+        this.bodies.push(body);
+        //this.collidingBodies.push(body);
+        return body;
+    }
+
+    createPointBodyComponent(x,y) {
+        let body = new PointBodyComponent(x,y);
         this.bodies.push(body);
         //this.collidingBodies.push(body);
         return body;
