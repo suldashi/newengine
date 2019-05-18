@@ -12,9 +12,11 @@ class Physics {
     }
 
     createBodyComponent(x,y,width,height) {
-        let body = new PolygonBodyComponent([new Vec2(x,y),new Vec2(x+width,y),new Vec2(x+width,y+height),new Vec2(x,y+height)]);
+        let hw = width/2;
+        let hh = height/2;
+        let body = new PolygonBodyComponent([new Vec2(x-hw,y-hh),new Vec2(x+hw,y-hh),new Vec2(x+hw,y+hh),new Vec2(x-hw,y+hh)]);
         this.bodies.push(body);
-        //this.collidingBodies.push(body);
+        this.collidingBodies.push(body);
         return body;
     }
 
@@ -47,6 +49,7 @@ class Physics {
                 if(collision) {
                     collision = collision.scale(-1);
                     this.collidingBodies[i].points = this.collidingBodies[i].points.map(x => x.add(collision));
+                    this.collidingBodies[i].center = this.collidingBodies[i].center.add(collision);
                 }
             }
         }

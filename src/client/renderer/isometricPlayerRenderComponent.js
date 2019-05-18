@@ -14,6 +14,8 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         this.scale = 2;
         this.reflected = this.playerComponent.isOrientedLeft;
         this.spriteName = this.playerComponent.playerState.sprite;
+        this.offsetX = 0;
+        this.offsetY = 0;
         this.displaySprite(this.spriteName);
         
     }
@@ -30,8 +32,8 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         }
         let ap = this.bodyComponent.position.isometric();
         let ac = camera.cameraPosition.isometric();
-        this.sprite.x = ap.x+ac.x;
-        this.sprite.y = ap.y+ac.y;
+        this.sprite.x = ap.x + ac.x + this.offsetX;
+        this.sprite.y = ap.y + ac.y + this.offsetY;
     }
 
     playAnimation(animationTextures,animationSpeed) {
@@ -57,9 +59,13 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         this.sheet = this.resources.sheets[this.baseName];
         let isAnimation = typeof this.resources.animations[spriteName] !== "undefined";
         if(isAnimation) {
+            this.offsetX = this.resources.animations[spriteName].offsetX;
+            this.offsetY = this.resources.animations[spriteName].offsetY;
             this.playAnimation(this.sheet.sheet.animations[spriteName],this.resources.animations[spriteName].speed);
         }   
         else {
+            this.offsetX = this.resources.images[spriteName].offsetX;
+            this.offsetY = this.resources.images[spriteName].offsetY;
             this.playAnimation([this.resources.images[spriteName].texture],1);
         }
     }

@@ -43,8 +43,8 @@ class IsometricStaticRenderComponent extends RenderComponent {
         this.sheet = this.resources.sheets[this.baseName];
         let isAnimation = typeof this.resources.animations[spriteName] !== "undefined";
         if(isAnimation) {
-            this.offsetX = this.resources.animations[baseName].offsetX;
-            this.offsetY = this.resources.animations[baseName].offsetY;
+            this.offsetX = this.resources.animations[this.baseName].offsetX;
+            this.offsetY = this.resources.animations[this.baseName].offsetY;
             this.playAnimation(this.sheet.sheet.animations[spriteName],this.resources.animations[spriteName].speed);
         }   
         else {

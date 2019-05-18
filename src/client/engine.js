@@ -33,6 +33,16 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createBlock(0,-128);
     engineCore.createBlock(128,-128);
     engineCore.createPlayer(0,0);
+    engineCore.createWall(0,128);
+    engineCore.createWall(0,256);
+    engineCore.createWall(128,384);
+    engineCore.createWall(256,384);
+    engineCore.createWall(384,256);
+    engineCore.createWall(256,128);
+    engineCore.createWall(256,0);
+    engineCore.createWall(128,-128);
+    engineCore.createWall(0,-128);
+    engineCore.createWall(-128,0);
     
     engineCore.createCornerText();
     //engineCore.createStaticTriangle(190,190,10);

@@ -31,6 +31,15 @@ class EngineCore {
         this.gameObjects.push(staticObject);
     }
 
+    createWall(x,y) {
+        let staticObject = new GameObject();
+        let bodyComponent = this.physics.createBodyComponent(x,y,128,128);
+        //let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
+        staticObject.attachComponent(bodyComponent);
+        //staticObject.attachComponent(renderComponent);
+        this.gameObjects.push(staticObject);
+    }
+
     createFloor(x,y) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
@@ -59,12 +68,13 @@ class EngineCore {
         let playerComponent = this.entityFactory.createPlayerComponent();
         let playerInputComponent = this.inputFactory.createPlayerInputComponent();
         let renderComponent = this.renderer.createPlayerRenderComponent(bodyComponent,playerComponent);
-        //let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
+        let renderComponent2 = this.renderer.createPolygonRenderComponent(bodyComponent);
         this.renderer.setActiveCamera(cameraComponent);
         player.attachComponent(playerBodyComponent);
         player.attachComponent(playerComponent);
         player.attachComponent(cameraComponent);
         player.attachComponent(renderComponent);
+        player.attachComponent(renderComponent2);
         player.attachComponent(playerInputComponent);
         this.gameObjects.push(player);
     }

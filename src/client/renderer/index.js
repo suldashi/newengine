@@ -17,7 +17,7 @@ class PixiRenderer {
         this.width = config.hres;
         this.height = config.vres;
         this.app = new PIXI.Application({width: this.width, height: this.height});
-        this.app.renderer.backgroundColor = 0xFFFFFF;
+        this.app.renderer.backgroundColor = 0xDBB691;
         this.graphics = new PIXI.Graphics();
         this.app.stage.addChild(this.graphics);
         this.app.stage.stageData = {
