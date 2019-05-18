@@ -29,9 +29,9 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createFloor(128,256);
     engineCore.createFloor(256,256);
     engineCore.createBlock(-128,-128);
-    engineCore.createBlock(-128,0);
+    engineCore.createMiniBlock(-128,0);
     engineCore.createBlock(0,-128);
-    engineCore.createBlock(128,-128);
+    engineCore.createMiniBlock(128,-128);
     engineCore.createPlayer(0,0);
     engineCore.createWall(0,128);
     engineCore.createWall(0,256);

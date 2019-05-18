@@ -3,13 +3,13 @@ const PIXI = require("./pixi");
 const Vec2 = require("../../common/physics/vec2");
 
 class IsometricStaticRenderComponent extends RenderComponent {
-    constructor(bodyComponent,resources,stage,isFloor) {
+    constructor(bodyComponent,resources,stage,spriteName) {
         super();
         this.bodyComponent = bodyComponent;
         this.resources = resources;
         this.stage = stage;
         this.scale = 1;
-        this.spriteName = isFloor?"floor_N":"block_N";
+        this.spriteName = spriteName;
         this.offsetX = 0;
         this.offsetY = 0;
         this.displaySprite(this.spriteName);

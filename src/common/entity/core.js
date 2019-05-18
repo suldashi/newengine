@@ -43,7 +43,7 @@ class EngineCore {
     createFloor(x,y) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,true);
+        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"floor_N");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
         this.gameObjects.push(staticObject);
@@ -52,7 +52,16 @@ class EngineCore {
     createBlock(x,y) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,false);
+        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"block_N");
+        staticObject.attachComponent(bodyComponent);
+        staticObject.attachComponent(renderComponent);
+        this.gameObjects.push(staticObject);
+    }
+
+    createMiniBlock(x,y) {
+        let staticObject = new GameObject();
+        let bodyComponent = this.physics.createPointBodyComponent(x,y);
+        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"half_N");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
         this.gameObjects.push(staticObject);

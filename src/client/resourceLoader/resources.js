@@ -27,7 +27,12 @@ module.exports = {
         block_N: {
             baseName:"floor",
             offsetY:-78,
+        },
+        half_N: {
+            baseName:"floor",
+            offsetY:-39,
         }
+
     },
     sheets: 
     {
