@@ -1,6 +1,5 @@
 const RenderComponent = require("./renderComponent");
 const PIXI = require("./pixi");
-const Vec2 = require("../../common/physics/vec2");
 
 class IsometricPlayerRenderComponent extends RenderComponent {
     constructor(bodyComponent,playerComponent,resources,stage) {
@@ -10,17 +9,18 @@ class IsometricPlayerRenderComponent extends RenderComponent {
 
         this.resources = resources;
         this.stage = stage;
-
+        this.zIndex = -100000;
         this.scale = 2;
         this.reflected = this.playerComponent.isOrientedLeft;
         this.spriteName = this.playerComponent.playerState.sprite;
         this.offsetX = 0;
         this.offsetY = 0;
+        this.isoPosition = this.bodyComponent.position.isometric();
         this.displaySprite(this.spriteName);
         
     }
 
-    update(graphics,stage,camera) {
+    update(camera) {
         if(this.spriteName !== this.playerComponent.playerState.sprite) {
             this.spriteName = this.playerComponent.playerState.sprite;
             this.destroyAnimation();
@@ -30,10 +30,10 @@ class IsometricPlayerRenderComponent extends RenderComponent {
             this.reflected = !this.reflected;
             this.sprite.scale.x*=-1;
         }
-        let ap = this.bodyComponent.position.isometric();
+        this.isoPosition = this.bodyComponent.position.isometric();
         let ac = camera.cameraPosition.isometric();
-        this.sprite.x = ap.x + ac.x + this.offsetX;
-        this.sprite.y = ap.y + ac.y + this.offsetY;
+        this.sprite.x = this.isoPosition.x + ac.x + this.offsetX;
+        this.sprite.y = this.isoPosition.y + ac.y + this.offsetY - this.bodyComponent.height;
     }
 
     playAnimation(animationTextures,animationSpeed) {
@@ -47,7 +47,7 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         }
         this.sprite.animationSpeed = animationSpeed;
         this.sprite.play();
-        this.stage.addChild(this.sprite);
+        this.stage.pixiStage.addChild(this.sprite);
     }
 
     destroyAnimation() {

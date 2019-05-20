@@ -11,6 +11,7 @@ class PolygonBodyComponent {
         }
         this.center = new Vec2(sumX/this.points.length,sumY/this.points.length);
         this.velocity = new Vec2(0,0);
+        this.height = 0;
     }
 
     setVelocity(velocity) {

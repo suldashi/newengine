@@ -1,19 +1,22 @@
 const RenderComponent = require("./renderComponent");
 
 class IsometricPolygonRenderComponent extends RenderComponent {
-    constructor(polygonComponent) {
+    constructor(bodyComponent) {
         super();
-        this.polygonComponent = polygonComponent;
+        this.bodyComponent = bodyComponent;
+        this.isoPosition = this.bodyComponent.position.isometric();
         this.color = 0xFF0000;
+        this.zIndex = 0;
     }
 
-    update(graphics,stage,camera) {
+    update(camera) {
         let cameraIso = camera.cameraPosition.isometric();
+        this.isoPosition = this.bodyComponent.position.isometric();
         graphics.beginFill(this.color);    //black
         let points = [];
-        for(var i in this.polygonComponent.points) {
-            let iso = this.polygonComponent.points[i].isometric();
-            points.push(iso.x + cameraIso.x,iso.y + cameraIso.y);
+        for(var i in this.bodyComponent.points) {
+            let iso = this.bodyComponent.points[i].isometric();
+            points.push(iso.x + cameraIso.x,iso.y + cameraIso.y - this.bodyComponent.height);
         }
         graphics.drawPolygon(points);
         graphics.endFill();

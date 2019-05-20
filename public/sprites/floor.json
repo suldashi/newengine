@@ -23,14 +23,22 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":207},
 	"sourceSize": {"w":256,"h":207}
+},
+"slopeHalf_S.png":
+{
+	"frame": {"x":0,"y":621,"w":256,"h":207},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":207},
+	"sourceSize": {"w":256,"h":207}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "floor.png",
 	"format": "RGBA8888",
-	"size": {"w":256,"h":621},
+	"size": {"w":256,"h":828},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:5c7bfc6d2ecdd68c8cda51657806b4c0:bdf7b109abefd19e2d25b18a5b202dc1:983c4ec08eeb1e3b230a24f8892bde6f$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f59664b26f4fd988baac63184aa5ec37:ed914f8f6d390534081bdf94d3c5b5aa:983c4ec08eeb1e3b230a24f8892bde6f$"
 }
 }

@@ -4,6 +4,7 @@ class PolygonBodyComponent {
     constructor(x,y) {
         this.position = new Vec2(x,y);
         this.velocity = new Vec2(0,0);
+        this.height = 0;
     }
 
     setVelocity(velocity) {

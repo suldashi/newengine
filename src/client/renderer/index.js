@@ -1,4 +1,5 @@
 const PIXI = require("./pixi");
+const SortableStage = require("./sortableStage");
 const CameraComponent = require("./cameraComponent");
 const InverseIsometricBodyCameraComponent = require("./inverseIsometricBodyCameraComponent");
 const IsometricPolygonRenderComponent = require("./isometricPolygonRenderComponent");
@@ -18,41 +19,42 @@ class PixiRenderer {
         this.height = config.vres;
         this.app = new PIXI.Application({width: this.width, height: this.height});
         this.app.renderer.backgroundColor = 0xDBB691;
-        this.graphics = new PIXI.Graphics();
-        this.app.stage.addChild(this.graphics);
-        this.app.stage.stageData = {
-            width: this.width,
-            height: this.height
-        }
+        this.sortableStage = new SortableStage({
+            pixiStage:this.app.stage,
+            width:this.width,
+            height:this.height,
+        });
         this.activeCamera = new CameraComponent(0,0);
         this.screenCenter = new Vec2(this.width/2,this.height/2);
         this.renderComponents = [];
+        this.screenRenderComponents = [];
+        this.comparator = (x,y) => x.isoPosition.y > y.isoPosition.y?1:-1;
         this.activePlayer = null;
         this.parentElement.appendChild(this.app.view);
         this.resources = resources;
     }
 
     createPolygonRenderComponent(bodyComponent) {
-        let renderComponent = new IsometricPolygonRenderComponent(bodyComponent);
-        this.renderComponents.push(renderComponent);
+        let renderComponent = new IsometricPolygonRenderComponent(bodyComponent,this.sortableStage);
+        this.sortableStage.addRenderComponent(renderComponent);
         return renderComponent;
     }
 
-    createStaticRenderComponent(bodyComponent,isFloor) {
-        let renderComponent = new IsometricStaticRenderComponent(bodyComponent,this.resources,this.app.stage,isFloor);
-        this.renderComponents.push(renderComponent);
+    createStaticRenderComponent(bodyComponent,textureName) {
+        let renderComponent = new IsometricStaticRenderComponent(bodyComponent,this.resources,this.sortableStage,textureName);
+        this.sortableStage.addRenderComponent(renderComponent);
         return renderComponent;
     }
 
     createPlayerRenderComponent(bodyComponent,playerComponent) {
-        let renderComponent = new IsometricPlayerRenderComponent(bodyComponent,playerComponent,this.resources,this.app.stage);
-        this.renderComponents.push(renderComponent);
+        let renderComponent = new IsometricPlayerRenderComponent(bodyComponent,playerComponent,this.resources,this.sortableStage);
+        this.sortableStage.addRenderComponent(renderComponent);
         return renderComponent;
     }
 
     createTextComponent() {
-        let renderComponent = new TextComponent(this.app.stage);
-        this.renderComponents.push(renderComponent);
+        let renderComponent = new TextComponent(this.sortableStage);
+        this.sortableStage.addRenderComponent(renderComponent);
         return renderComponent;
     }
 
@@ -66,11 +68,8 @@ class PixiRenderer {
 
     drawFrame() {
         requestAnimationFrame(() => {
-            this.graphics.clear();
             this.activeCamera.update().negateAndMove(this.screenCenter);
-            for(var i in this.renderComponents) {
-                this.renderComponents[i].update(this.graphics,this.app.stage,this.activeCamera);
-            }
+            this.sortableStage.updateAll(this.activeCamera);
         });   
     }
 }

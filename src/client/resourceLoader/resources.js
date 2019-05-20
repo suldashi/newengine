@@ -31,6 +31,10 @@ module.exports = {
         half_N: {
             baseName:"floor",
             offsetY:-39,
+        },
+        slopeHalf_S: {
+            baseName:"floor",
+            offsetY:-39,
         }
 
     },

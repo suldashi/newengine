@@ -45,11 +45,13 @@ class Physics {
     checkCollisionPairs() {
         for(var i=0;i<this.collidingBodies.length-1;i++) {
             for(var j=i+1;j<this.collidingBodies.length;j++) {
-                let collision = checkCollision(this.collidingBodies[i],this.collidingBodies[j]);
-                if(collision) {
-                    collision = collision.scale(-1);
-                    this.collidingBodies[i].points = this.collidingBodies[i].points.map(x => x.add(collision));
-                    this.collidingBodies[i].center = this.collidingBodies[i].center.add(collision);
+                if(this.collidingBodies[i].height === this.collidingBodies[j].height) {
+                    let collision = checkCollision(this.collidingBodies[i],this.collidingBodies[j]);
+                    if(collision) {
+                        collision = collision.scale(-1);
+                        this.collidingBodies[i].points = this.collidingBodies[i].points.map(x => x.add(collision));
+                        this.collidingBodies[i].center = this.collidingBodies[i].center.add(collision);
+                    }
                 }
             }
         }
