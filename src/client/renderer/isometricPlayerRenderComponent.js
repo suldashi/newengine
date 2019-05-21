@@ -1,5 +1,6 @@
 const RenderComponent = require("./renderComponent");
 const PIXI = require("./pixi");
+const RenderUtils = require("./renderUtils");
 
 class IsometricPlayerRenderComponent extends RenderComponent {
     constructor(bodyComponent,playerComponent,resources,stage) {
@@ -20,7 +21,7 @@ class IsometricPlayerRenderComponent extends RenderComponent {
     }
 
     get zIndex() {
-        return this.bodyComponent.position.x + this.bodyComponent.position.y;
+        return this.bodyComponent.position.x + this.bodyComponent.position.y + this.bodyComponent.height;
     }
 
     update(camera) {
@@ -37,7 +38,7 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         let ac = camera.cameraPosition.isometric();
         this.sprite.zIndex = this.zIndex;
         this.sprite.x = this.isoPosition.x + ac.x + this.offsetX;
-        this.sprite.y = this.isoPosition.y + ac.y + this.offsetY - this.bodyComponent.height;
+        this.sprite.y = this.isoPosition.y + ac.y + this.offsetY - this.bodyComponent.height*RenderUtils.isoHeightAdjustmentFactor;
     }
 
     playAnimation(animationTextures,animationSpeed) {

@@ -23,6 +23,7 @@ resourceLoader.loadAllResources().then((resources) => {
         new EntityFactory(),
         new InputFactory()
     );
+    /*
     engineCore.createFloor(256,256);
 
     engineCore.createFloor(128,256);
@@ -46,8 +47,20 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createMiniBlock(-256,-128);
 
     engineCore.createBlock(-256,-256);
-    
+    */
     engineCore.createPlayer(0,0);
+    engineCore.createWall(0,-128);
+    engineCore.createRamp(0,-128);
+    engineCore.createBlock(0,-128);
+    engineCore.createFloor(0,0);
+    engineCore.createFloor(128,0);
+    engineCore.createFloor(128,-128);
+    engineCore.createFloor(128,-256);
+    engineCore.createFloor(0,-256);
+    engineCore.createFloor(-128,-256);
+    engineCore.createFloor(-128,-128);
+    engineCore.createFloor(-128,0);
+    
     engineCore.createCornerText();
     
     MainLoop.setUpdate((delta) => {

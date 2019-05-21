@@ -70,6 +70,7 @@ class EngineCore {
     createRamp(x,y) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
+        bodyComponent.height = 128;
         let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"slopeHalf_S");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
