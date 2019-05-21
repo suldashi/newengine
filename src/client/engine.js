@@ -60,6 +60,19 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createFloor(-128,-256);
     engineCore.createFloor(-128,-128);
     engineCore.createFloor(-128,0);
+    engineCore.createWall(-256,0);
+    engineCore.createWall(-128,128);
+    engineCore.createWall(0,128);
+    engineCore.createWall(128,128);
+    engineCore.createWall(256,0);
+    engineCore.createWall(256,-128);
+    engineCore.createWall(-256,-128);
+    engineCore.createWall(256,-256);
+    engineCore.createWall(-256,-256);
+    engineCore.createWall(-128,-384);
+    engineCore.createWall(0,-384);
+    engineCore.createWall(128,-384);
+    
     
     engineCore.createCornerText();
     
