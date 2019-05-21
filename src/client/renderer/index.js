@@ -19,6 +19,7 @@ class PixiRenderer {
         this.height = config.vres;
         this.app = new PIXI.Application({width: this.width, height: this.height});
         this.app.renderer.backgroundColor = 0xDBB691;
+        this.app.stage.sortableChildren = true;
         this.sortableStage = new SortableStage({
             pixiStage:this.app.stage,
             width:this.width,
@@ -27,9 +28,6 @@ class PixiRenderer {
         this.activeCamera = new CameraComponent(0,0);
         this.screenCenter = new Vec2(this.width/2,this.height/2);
         this.renderComponents = [];
-        this.screenRenderComponents = [];
-        this.comparator = (x,y) => x.isoPosition.y > y.isoPosition.y?1:-1;
-        this.activePlayer = null;
         this.parentElement.appendChild(this.app.view);
         this.resources = resources;
     }
@@ -40,8 +38,8 @@ class PixiRenderer {
         return renderComponent;
     }
 
-    createStaticRenderComponent(bodyComponent,textureName) {
-        let renderComponent = new IsometricStaticRenderComponent(bodyComponent,this.resources,this.sortableStage,textureName);
+    createStaticRenderComponent(bodyComponent,textureName,height) {
+        let renderComponent = new IsometricStaticRenderComponent(bodyComponent,this.resources,this.sortableStage,textureName,height);
         this.sortableStage.addRenderComponent(renderComponent);
         return renderComponent;
     }

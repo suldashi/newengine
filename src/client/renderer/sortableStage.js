@@ -13,21 +13,6 @@ class SortableStage {
     }
 
     updateAll(activeCamera) {
-        this.renderComponents = sort(this.renderComponents,(l,r) => {
-            if(l.zIndex < r.zIndex) {
-                return -1;
-            }
-            else if(l.zIndex > r.zIndex) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
-        },(i,j) => {
-            let lChild = this.pixiStage.getChildAt(i);
-            let rChild = this.pixiStage.getChildAt(j);
-            this.pixiStage.swapChildren(lChild,rChild);
-        });
         for(var i in this.renderComponents) {
             this.renderComponents[i].update(activeCamera);
         }

@@ -6,7 +6,7 @@ class TextComponent extends RenderComponent {
     constructor(stage) {
         super();
         this.stage = stage;
-        this.zIndex = 0;
+        this.zIndex = 100000000;
         this.angle = 0;
         this.spinningText = new PIXI.Text(this.angle, {fill: '#000', align: 'right'});
         this.spinningText.anchor.x=1;

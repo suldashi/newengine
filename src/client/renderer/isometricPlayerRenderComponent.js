@@ -9,7 +9,6 @@ class IsometricPlayerRenderComponent extends RenderComponent {
 
         this.resources = resources;
         this.stage = stage;
-        this.zIndex = -100000;
         this.scale = 2;
         this.reflected = this.playerComponent.isOrientedLeft;
         this.spriteName = this.playerComponent.playerState.sprite;
@@ -18,6 +17,10 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         this.isoPosition = this.bodyComponent.position.isometric();
         this.displaySprite(this.spriteName);
         
+    }
+
+    get zIndex() {
+        return this.bodyComponent.position.x + this.bodyComponent.position.y;
     }
 
     update(camera) {
@@ -32,6 +35,7 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         }
         this.isoPosition = this.bodyComponent.position.isometric();
         let ac = camera.cameraPosition.isometric();
+        this.sprite.zIndex = this.zIndex;
         this.sprite.x = this.isoPosition.x + ac.x + this.offsetX;
         this.sprite.y = this.isoPosition.y + ac.y + this.offsetY - this.bodyComponent.height;
     }
@@ -40,6 +44,7 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         this.sheet = this.resources.sheets[this.baseName];
         this.animation = animationTextures;
         this.sprite = new PIXI.AnimatedSprite(this.animation);
+        this.sprite.zIndex = this.zIndex;
         this.sprite.anchor = new PIXI.ObservablePoint(null,null,0.5,0.5);
         this.sprite.scale.x = this.sprite.scale.y = this.scale;
         if(this.reflected) {

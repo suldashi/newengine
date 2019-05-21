@@ -18,12 +18,16 @@ class IsometricStaticRenderComponent extends RenderComponent {
     }
 
     get zIndex() {
-        return this.isoPosition.y;
+        if(this.spriteName==="floor_N") {
+            return -100000000;
+        }
+        return this.bodyComponent.position.x + this.bodyComponent.position.y;
     }
 
     update(camera) {
         this.isoPosition = this.bodyComponent.position.isometric();
         let ac = camera.cameraPosition.isometric();
+        this.sprite.zIndex = this.zIndex;
         this.sprite.x = this.isoPosition.x+ac.x + this.offsetX;
         this.sprite.y = this.isoPosition.y+ac.y + this.offsetY - this.bodyComponent.height;
     }
@@ -36,6 +40,7 @@ class IsometricStaticRenderComponent extends RenderComponent {
         this.sprite.scale.x = this.sprite.scale.y = this.scale;
         this.sprite.animationSpeed = animationSpeed;
         this.sprite.play();
+        
         this.stage.pixiStage.addChild(this.sprite);
     }
 
