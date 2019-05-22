@@ -5,6 +5,7 @@ const InverseIsometricBodyCameraComponent = require("./inverseIsometricBodyCamer
 const IsometricPolygonRenderComponent = require("./isometricPolygonRenderComponent");
 const IsometricPlayerRenderComponent = require("./isometricPlayerRenderComponent");
 const IsometricStaticRenderComponent = require("./isometricStaticRenderComponent");
+const IsometricSwitchRenderComponent = require("./isometricSwitchRenderComponent");
 const TextComponent = require("./textComponent");
 const Vec2 = require("../../common/physics/vec2");
 const config = require("../../common/config");
@@ -40,6 +41,12 @@ class PixiRenderer {
 
     createStaticRenderComponent(bodyComponent,textureName,height) {
         let renderComponent = new IsometricStaticRenderComponent(bodyComponent,this.resources,this.sortableStage,textureName,height);
+        this.sortableStage.addRenderComponent(renderComponent);
+        return renderComponent;
+    }
+
+    createSwitchRenderComponent(bodyComponent,switchComponent) {
+        let renderComponent = new IsometricSwitchRenderComponent(bodyComponent,switchComponent,this.resources,this.sortableStage);
         this.sortableStage.addRenderComponent(renderComponent);
         return renderComponent;
     }

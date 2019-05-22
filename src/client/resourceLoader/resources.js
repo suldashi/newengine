@@ -38,6 +38,9 @@ module.exports = {
         },
         switchFloorOff_N: {
             baseName:"floor"
+        },
+        switchFloorOn_N: {
+            baseName:"floor"
         }
 
     },
@@ -87,6 +90,13 @@ module.exports = {
             frames:["run_se_1","run_se_2","run_se_3","run_se_4","run_se_5","run_se_6"],
             speed:1/6,
             offsetY:playerOffsetY,
+        },
+        {
+            baseName:"floor",
+            name:"arrow",
+            frames:["arrow_0","arrow_1","arrow_2","arrow_3"],
+            speed:1/6,
+            offsetY:-10,
         },
     ]
 };

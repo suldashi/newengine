@@ -1,8 +1,40 @@
 {"frames": {
 
+"arrow_0.png":
+{
+	"frame": {"x":130,"y":70,"w":97,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":70},
+	"sourceSize": {"w":97,"h":70}
+},
+"arrow_1.png":
+{
+	"frame": {"x":97,"y":140,"w":97,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":70},
+	"sourceSize": {"w":97,"h":70}
+},
+"arrow_2.png":
+{
+	"frame": {"x":0,"y":140,"w":97,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":70},
+	"sourceSize": {"w":97,"h":70}
+},
+"arrow_3.png":
+{
+	"frame": {"x":130,"y":0,"w":97,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":97,"h":70},
+	"sourceSize": {"w":97,"h":70}
+},
 "block_N.png":
 {
-	"frame": {"x":0,"y":0,"w":256,"h":286},
+	"frame": {"x":0,"y":752,"w":256,"h":286},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":286},
@@ -10,7 +42,7 @@
 },
 "floor_N.png":
 {
-	"frame": {"x":0,"y":286,"w":256,"h":128},
+	"frame": {"x":0,"y":210,"w":256,"h":128},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":128},
@@ -18,7 +50,7 @@
 },
 "half_N.png":
 {
-	"frame": {"x":0,"y":414,"w":256,"h":207},
+	"frame": {"x":0,"y":545,"w":256,"h":207},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":207},
@@ -26,7 +58,7 @@
 },
 "slopeHalf_S.png":
 {
-	"frame": {"x":0,"y":621,"w":256,"h":207},
+	"frame": {"x":0,"y":338,"w":256,"h":207},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":207},
@@ -34,19 +66,30 @@
 },
 "switchFloorOff_N.png":
 {
-	"frame": {"x":0,"y":828,"w":130,"h":70},
+	"frame": {"x":0,"y":0,"w":130,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":70},
+	"sourceSize": {"w":130,"h":70}
+},
+"switchFloorOn_N.png":
+{
+	"frame": {"x":0,"y":70,"w":130,"h":70},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":70},
 	"sourceSize": {"w":130,"h":70}
 }},
+"animations": {
+	"arrow": ["arrow_0.png","arrow_1.png","arrow_2.png","arrow_3.png"]
+},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "floor.png",
 	"format": "RGBA8888",
-	"size": {"w":256,"h":898},
+	"size": {"w":256,"h":1038},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:532d63c83df2dbf8bb1861c6a2de40ea:cb602309998adad051f6698f0f1b3147:983c4ec08eeb1e3b230a24f8892bde6f$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d7083722adc433a1f7c718fd871a220c:6da0042234adde0283391998f95a821a:983c4ec08eeb1e3b230a24f8892bde6f$"
 }
 }

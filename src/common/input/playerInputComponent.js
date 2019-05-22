@@ -45,7 +45,7 @@ class PlayerInputComponent {
 
     update() { 
         if(this.updated) {
-            eventBus.emitEvent("newPlayerControls",this.getInputs());
+            eventBus.emit("newPlayerControls",this.getInputs());
             this.updated = false;
         }
     }

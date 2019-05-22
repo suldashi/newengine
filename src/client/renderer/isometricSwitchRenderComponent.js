@@ -2,14 +2,15 @@ const RenderComponent = require("./renderComponent");
 const PIXI = require("./pixi");
 const RenderUtils = require("./renderUtils");
 
-class IsometricStaticRenderComponent extends RenderComponent {
-    constructor(bodyComponent,resources,stage,spriteName) {
+class IsometricSwitchRenderComponent extends RenderComponent {
+    constructor(bodyComponent,switchComponent,resources,stage) {
         super();
-        this.bodyComponent = bodyComponent;
+        this.switchComponent = switchComponent;
+        this.bodyComponent = bodyComponent
         this.resources = resources;
         this.stage = stage;
         this.scale = 1;
-        this.spriteName = spriteName;
+        this.spriteName = switchComponent.spriteName;
         this.offsetX = 0;
         this.offsetY = 0;
         this.isoPosition = this.bodyComponent.position.isometric();
@@ -18,13 +19,15 @@ class IsometricStaticRenderComponent extends RenderComponent {
     }
 
     get zIndex() {
-        if(this.spriteName==="floor_N" || this.spriteName==="switchFloorOff_N" || this.spriteName==="switchFloorOn_N") {
-            return -100000000;
-        }
-        return this.bodyComponent.position.x + this.bodyComponent.position.y + this.bodyComponent.height;
+        return -100000000;
     }
 
     update(camera) {
+        if(this.spriteName !== this.switchComponent.spriteName) {
+            this.spriteName = this.switchComponent.spriteName;
+            this.destroyAnimation();
+            this.displaySprite(this.spriteName);
+        }
         this.isoPosition = this.bodyComponent.position.isometric();
         let ac = camera.cameraPosition.isometric();
         this.sprite.zIndex = this.zIndex;
@@ -69,4 +72,4 @@ class IsometricStaticRenderComponent extends RenderComponent {
     }
 }
 
-module.exports = IsometricStaticRenderComponent;
+module.exports = IsometricSwitchRenderComponent;

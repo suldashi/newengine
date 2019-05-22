@@ -1,6 +1,7 @@
 const PlayerComponent = require("./player");
 const PlayerBodyComponent = require("./player/playerBodyComponent");
 const PlayerPolygonComponent = require("./player/playerPolygonComponent");
+const SwitchComponent = require("./switchComponent");
 
 class EntityFactory {
     constructor() {
@@ -23,6 +24,11 @@ class EntityFactory {
         let playerPolygonComponent = new PlayerPolygonComponent(polygonComponent);
         this.components.push(playerPolygonComponent);
         return playerPolygonComponent;
+    }
+
+    createSwitchComponent(isOn) {
+        let switchComponent = new SwitchComponent(isOn);
+        return switchComponent;
     }
 
     update(delta) {

@@ -5,19 +5,19 @@ class KeyboardInputProvider{
         window.onkeydown = (event) => {
             switch(event.code) {
                 case "KeyW": {
-                    eventBus.emitEvent("newInputUp",true);
+                    eventBus.emit("newInputUp",true);
                     break;
                 }
                 case "KeyS": {
-                    eventBus.emitEvent("newInputDown",true);
+                    eventBus.emit("newInputDown",true);
                     break;
                 }
                 case "KeyA": {
-                    eventBus.emitEvent("newInputLeft",true);
+                    eventBus.emit("newInputLeft",true);
                     break;
                 }
                 case "KeyD": {
-                    eventBus.emitEvent("newInputRight",true);
+                    eventBus.emit("newInputRight",true);
                     break;
                 }
             }
@@ -25,19 +25,19 @@ class KeyboardInputProvider{
         window.onkeyup = (event) => {
             switch(event.code) {
                 case "KeyW": {
-                    eventBus.emitEvent("newInputUp",false);
+                    eventBus.emit("newInputUp",false);
                     break;
                 }
                 case "KeyS": {
-                    eventBus.emitEvent("newInputDown",false);
+                    eventBus.emit("newInputDown",false);
                     break;
                 }
                 case "KeyA": {
-                    eventBus.emitEvent("newInputLeft",false);
+                    eventBus.emit("newInputLeft",false);
                     break;
                 }
                 case "KeyD": {
-                    eventBus.emitEvent("newInputRight",false);
+                    eventBus.emit("newInputRight",false);
                     break;
                 }
             }

@@ -36,7 +36,7 @@ class PlayerBodyComponent {
     }
 
     update() { 
-        eventBus.emitEvent("playerPosition",{
+        eventBus.emit("playerPosition",{
             position:this.bodyComponent.position.copy()
         });
     }

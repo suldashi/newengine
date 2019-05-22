@@ -13,32 +13,32 @@ class TouchscreenInputProvider {
         this.leftDomEl.ontouchstart = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            eventBus.emitEvent("newInputLeft",true);
+            eventBus.emit("newInputLeft",true);
         };
         this.leftDomEl.ontouchend = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            eventBus.emitEvent("newInputLeft",false);
+            eventBus.emit("newInputLeft",false);
         };
         this.rightDomEl.ontouchstart = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            eventBus.emitEvent("newInputRight",true);
+            eventBus.emit("newInputRight",true);
         };
         this.rightDomEl.ontouchend = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            eventBus.emitEvent("newInputRight",false);
+            eventBus.emit("newInputRight",false);
         };
         this.jumpDomEl.ontouchstart = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            eventBus.emitEvent("newInputUp",true);
+            eventBus.emit("newInputUp",true);
         };
         this.jumpDomEl.ontouchend = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            eventBus.emitEvent("newInputUp",false);
+            eventBus.emit("newInputUp",false);
         };*/
         this.touchHandler = (e) => {
             e.stopPropagation();
@@ -62,10 +62,10 @@ class TouchscreenInputProvider {
                 let angleNr = 0;
                 if(this.currentAngleNr!==angleNr) {
                     this.currentAngleNr = angleNr;
-                    eventBus.emitEvent("newInputRight",true);
-                    eventBus.emitEvent("newInputUp",false);
-                    eventBus.emitEvent("newInputDown",false);
-                    eventBus.emitEvent("newInputLeft",false);
+                    eventBus.emit("newInputRight",true);
+                    eventBus.emit("newInputUp",false);
+                    eventBus.emit("newInputDown",false);
+                    eventBus.emit("newInputLeft",false);
                 }
                 
             }
@@ -73,70 +73,70 @@ class TouchscreenInputProvider {
                 let angleNr = 1;
                 if(this.currentAngleNr!==angleNr) {
                     this.currentAngleNr = angleNr;
-                    eventBus.emitEvent("newInputRight",true);
-                    eventBus.emitEvent("newInputUp",true);
-                    eventBus.emitEvent("newInputDown",false);
-                    eventBus.emitEvent("newInputLeft",false);
+                    eventBus.emit("newInputRight",true);
+                    eventBus.emit("newInputUp",true);
+                    eventBus.emit("newInputDown",false);
+                    eventBus.emit("newInputLeft",false);
                 }
             }
             else if(angle<=Math.PI/2+offset && angle>=Math.PI/2-offset) {
                 let angleNr = 2;
                 if(this.currentAngleNr!==angleNr) {
                     this.currentAngleNr = angleNr;
-                    eventBus.emitEvent("newInputUp",true);
-                    eventBus.emitEvent("newInputDown",false);
-                    eventBus.emitEvent("newInputLeft",false);
-                    eventBus.emitEvent("newInputRight",false);
+                    eventBus.emit("newInputUp",true);
+                    eventBus.emit("newInputDown",false);
+                    eventBus.emit("newInputLeft",false);
+                    eventBus.emit("newInputRight",false);
                 }
             }
             else if(angle<=3*Math.PI/4+offset && angle>=3*Math.PI/4-offset) {
                 let angleNr = 3;
                 if(this.currentAngleNr!==angleNr) {
                     this.currentAngleNr = angleNr;
-                    eventBus.emitEvent("newInputUp",true);
-                    eventBus.emitEvent("newInputLeft",true);
-                    eventBus.emitEvent("newInputDown",false);
-                    eventBus.emitEvent("newInputRight",false);
+                    eventBus.emit("newInputUp",true);
+                    eventBus.emit("newInputLeft",true);
+                    eventBus.emit("newInputDown",false);
+                    eventBus.emit("newInputRight",false);
                 }
             }
             else if(angle<=Math.PI+offset && angle>=Math.PI-offset) {
                 let angleNr = 4;
                 if(this.currentAngleNr!==angleNr) {
                     this.currentAngleNr = angleNr;
-                    eventBus.emitEvent("newInputLeft",true);
-                    eventBus.emitEvent("newInputUp",false);
-                    eventBus.emitEvent("newInputDown",false);
-                    eventBus.emitEvent("newInputRight",false);
+                    eventBus.emit("newInputLeft",true);
+                    eventBus.emit("newInputUp",false);
+                    eventBus.emit("newInputDown",false);
+                    eventBus.emit("newInputRight",false);
                 }
             }
             else if(angle<=5*Math.PI/4+offset && angle>=5*Math.PI/4-offset) {
                 let angleNr = 5;
                 if(this.currentAngleNr!==angleNr) {
                     this.currentAngleNr = angleNr;
-                    eventBus.emitEvent("newInputDown",true);
-                    eventBus.emitEvent("newInputLeft",true);
-                    eventBus.emitEvent("newInputUp",false);
-                    eventBus.emitEvent("newInputRight",false);
+                    eventBus.emit("newInputDown",true);
+                    eventBus.emit("newInputLeft",true);
+                    eventBus.emit("newInputUp",false);
+                    eventBus.emit("newInputRight",false);
                 }
             }
             else if(angle<=6*Math.PI/4+offset && angle>=6*Math.PI/4-offset) {
                 let angleNr = 6;
                 if(this.currentAngleNr!==angleNr) {
                     this.currentAngleNr = angleNr;
-                    eventBus.emitEvent("newInputDown",true);
-                    eventBus.emitEvent("newInputUp",false);
-                    eventBus.emitEvent("newInputLeft",false);
-                    eventBus.emitEvent("newInputRight",false);
+                    eventBus.emit("newInputDown",true);
+                    eventBus.emit("newInputUp",false);
+                    eventBus.emit("newInputLeft",false);
+                    eventBus.emit("newInputRight",false);
                 }
             }
             else {
                 let angleNr = 7;
                 if(this.currentAngleNr!==angleNr) {
                     this.currentAngleNr = angleNr;
-                    eventBus.emitEvent("newInputDown",true);
-                    eventBus.emitEvent("newInputRight",true);
-                    eventBus.emitEvent("newInputUp",false);
-                    eventBus.emitEvent("newInputLeft",false);
+                    eventBus.emit("newInputDown",true);
+                    eventBus.emit("newInputRight",true);
+                    eventBus.emit("newInputUp",false);
+                    eventBus.emit("newInputLeft",false);
                 }
             }
         };
@@ -146,10 +146,10 @@ class TouchscreenInputProvider {
 
         this.controlEl.ontouchend = (e) => {
             this.controlEl.style.backgroundPosition = `${this.containerSize/2-this.backgroundSize/2}px ${this.containerSize/2-this.backgroundSize/2}px`;
-            eventBus.emitEvent("newInputUp",false);
-            eventBus.emitEvent("newInputDown",false);
-            eventBus.emitEvent("newInputLeft",false);
-            eventBus.emitEvent("newInputRight",false);
+            eventBus.emit("newInputUp",false);
+            eventBus.emit("newInputDown",false);
+            eventBus.emit("newInputLeft",false);
+            eventBus.emit("newInputRight",false);
         }
 
          

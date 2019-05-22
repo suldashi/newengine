@@ -20,11 +20,11 @@ class PlayerComponent {
         if((inputs.up ^ inputs.down) || (inputs.left ^ inputs.right)) {
             this.setRunning();
             this.setAngle(this.getAngle(inputs));
-            eventBus.emitEvent("playerMove",{angle:this.playerState.angle});
+            eventBus.emit("playerMove",{angle:this.playerState.angle});
         }
         else {
             this.setIdle();
-            eventBus.emitEvent("playerStop");
+            eventBus.emit("playerStop");
         }
     }
 

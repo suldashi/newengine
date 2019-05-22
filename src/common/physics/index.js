@@ -42,8 +42,8 @@ class Physics {
         return polygonRotationComponent;
     }
 
-    createColliderComponent(colliderTag,bodyComponent) {
-        let colliderComponent = new ColliderComponent(colliderTag,bodyComponent);
+    createColliderComponent(bodyComponent,colliderTag) {
+        let colliderComponent = new ColliderComponent(bodyComponent,colliderTag);
         this.colliders.push(colliderComponent);
         return colliderComponent;
     }

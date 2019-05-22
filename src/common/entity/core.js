@@ -1,5 +1,4 @@
 const GameObject = require("./gameObject");
-const EngineCoreContainer = require("./coreContainer");
 const eventBus = require("../event");
 
 class EngineCore {
@@ -10,10 +9,6 @@ class EngineCore {
         this.entityFactory = entityFactory;
         this.inputFactory = inputFactory;
         this.gameObjects = [];
-        EngineCoreContainer.setCoreInstance(this);
-        this.physics.registerCollider("player","switch",(firstCollider,secondCollider) => {
-            console.log("we are standing on a switch");
-        });
         this.physics.registerCollider("player","wall",(firstCollider,secondCollider,collisionVector) => {
             if(firstCollider.colliderTag === "player") {
                 let reverseCollisionVector = collisionVector.scale(-1);
@@ -45,21 +40,60 @@ class EngineCore {
         this.gameObjects.push(staticObject);
     }
 
-    createSwitch(x,y) {
+    createOffSwitch(x,y) {
         let switchObject = new GameObject();
         let bodyComponent = this.physics.createBodyComponent(x,y,64,64);
-        let colliderComponent = this.physics.createColliderComponent("switch",bodyComponent);
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"switchFloorOff_N");
+        let colliderComponent = this.physics.createColliderComponent(bodyComponent,"switch2");
+        let switchComponent = this.entityFactory.createSwitchComponent();
+        let renderComponent = this.renderer.createSwitchRenderComponent(bodyComponent,switchComponent);
+        this.physics.registerCollider("player","switch2",() => {
+            eventBus.emit("playerOnSwitch2");
+        });
+        eventBus.on("playerOnSwitch2",() => {
+            if(!switchComponent.isOn) {
+                switchComponent.isOn = true;
+                eventBus.emit("switchOn");
+            }
+        });
+        eventBus.on("switchOff",() => {
+            switchComponent.isOn = false;
+        });
         switchObject.attachComponent(bodyComponent);
         switchObject.attachComponent(colliderComponent);
         switchObject.attachComponent(renderComponent);
+        switchObject.attachComponent(switchComponent);
+        this.gameObjects.push(switchObject);
+    }
+
+    createOnSwitch(x,y) {
+        let switchObject = new GameObject();
+        let bodyComponent = this.physics.createBodyComponent(x,y,64,64);
+        let colliderComponent = this.physics.createColliderComponent(bodyComponent,"switch1");
+        let switchComponent = this.entityFactory.createSwitchComponent(true);
+        let renderComponent = this.renderer.createSwitchRenderComponent(bodyComponent,switchComponent);
+        this.physics.registerCollider("player","switch1",() => {
+            eventBus.emit("playerOnSwitch1");
+        });
+        eventBus.on("playerOnSwitch1",() => {
+            if(!switchComponent.isOn) {
+                switchComponent.isOn = true;
+                eventBus.emit("switchOff");
+            }
+        });
+        eventBus.on("switchOn",() => {
+            switchComponent.isOn = false;
+        });
+        switchObject.attachComponent(bodyComponent);
+        switchObject.attachComponent(colliderComponent);
+        switchObject.attachComponent(renderComponent);
+        switchObject.attachComponent(switchComponent);
         this.gameObjects.push(switchObject);
     }
 
     createWall(x,y) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createBodyComponent(x,y,128,128);
-        let colliderComponent = this.physics.createColliderComponent("wall",bodyComponent);
+        let colliderComponent = this.physics.createColliderComponent(bodyComponent,"wall");
         //let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(colliderComponent);
@@ -105,6 +139,22 @@ class EngineCore {
         this.gameObjects.push(staticObject);
     }
 
+    createArrow(x,y,height = 0) {
+        let staticObject = new GameObject();
+        let bodyComponent = this.physics.createPointBodyComponent(x,y);
+        bodyComponent.height = height;
+        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"arrow");
+        eventBus.on("switchOff",() => {
+            renderComponent.sprite.play();
+        });
+        eventBus.on("switchOn",() => {
+            renderComponent.sprite.stop();
+        });
+        staticObject.attachComponent(bodyComponent);
+        staticObject.attachComponent(renderComponent);
+        this.gameObjects.push(staticObject);
+    }
+
     createPlayer(x,y) {
         let player = new GameObject();
         let w = 20;
@@ -115,7 +165,7 @@ class EngineCore {
         let playerComponent = this.entityFactory.createPlayerComponent();
         let playerInputComponent = this.inputFactory.createPlayerInputComponent();
         let renderComponent = this.renderer.createPlayerRenderComponent(bodyComponent,playerComponent);
-        let colliderComponent = this.physics.createColliderComponent("player",bodyComponent);
+        let colliderComponent = this.physics.createColliderComponent(bodyComponent,"player");
         this.renderer.setActiveCamera(cameraComponent);
         player.attachComponent(playerBodyComponent);
         player.attachComponent(playerComponent);

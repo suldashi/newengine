@@ -5,31 +5,17 @@ class EventBus {
         this.eventHandlers = [];
     }
     
-    emitEvent(eventName,eventData) {
+    emit(eventName,eventData) {
         for(var i in this.eventHandlers[eventName]) {
-            if(i !== "*") {
-                this.eventHandlers[eventName][i](eventData);
-            }
-            else {
-                this.eventHandlers[eventName]["*"].forEach((el) => {
-                    el(eventData);
-                });
-            }
+            this.eventHandlers[eventName][i](eventData);
         }
     }
 
-    on(eventName,callback,eventTarget) {
+    on(eventName,callback) {
         if(!this.eventHandlers[eventName]) {
             this.eventHandlers[eventName] = [];
-            this.eventHandlers[eventName]["*"] = [];
         }
-        if(eventTarget) {
-            this.eventHandlers[eventName][eventTarget] = callback;
-        }
-        else {
-            this.eventHandlers[eventName]["*"].push(callback);
-        }
-        
+        this.eventHandlers[eventName].push(callback);
     }
 }
 

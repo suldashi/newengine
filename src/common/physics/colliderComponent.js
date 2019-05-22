@@ -1,7 +1,7 @@
 class ColliderComponent {
-    constructor(colliderTag, bodyComponent) {
-        this.colliderTag = colliderTag;
+    constructor(bodyComponent, colliderTag) {
         this.bodyComponent = bodyComponent;
+        this.colliderTag = colliderTag;
     }
 }
 
