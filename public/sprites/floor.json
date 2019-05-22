@@ -31,14 +31,22 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":207},
 	"sourceSize": {"w":256,"h":207}
+},
+"switchFloorOff_N.png":
+{
+	"frame": {"x":0,"y":828,"w":130,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":70},
+	"sourceSize": {"w":130,"h":70}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "floor.png",
 	"format": "RGBA8888",
-	"size": {"w":256,"h":828},
+	"size": {"w":256,"h":898},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f59664b26f4fd988baac63184aa5ec37:ed914f8f6d390534081bdf94d3c5b5aa:983c4ec08eeb1e3b230a24f8892bde6f$"
+	"smartupdate": "$TexturePacker:SmartUpdate:532d63c83df2dbf8bb1861c6a2de40ea:cb602309998adad051f6698f0f1b3147:983c4ec08eeb1e3b230a24f8892bde6f$"
 }
 }

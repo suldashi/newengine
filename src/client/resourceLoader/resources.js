@@ -35,6 +35,9 @@ module.exports = {
         slopeHalf_S: {
             baseName:"floor",
             offsetY:-39,
+        },
+        switchFloorOff_N: {
+            baseName:"floor"
         }
 
     },

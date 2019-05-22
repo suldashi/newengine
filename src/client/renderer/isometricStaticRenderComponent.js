@@ -18,7 +18,7 @@ class IsometricStaticRenderComponent extends RenderComponent {
     }
 
     get zIndex() {
-        if(this.spriteName==="floor_N") {
+        if(this.spriteName==="floor_N" || this.spriteName==="switchFloorOff_N") {
             return -100000000;
         }
         return this.bodyComponent.position.x + this.bodyComponent.position.y + this.bodyComponent.height;

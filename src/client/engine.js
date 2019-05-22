@@ -48,6 +48,7 @@ resourceLoader.loadAllResources().then((resources) => {
 
     engineCore.createBlock(-256,-256);
     */
+    
     engineCore.createPlayer(0,0);
     engineCore.createWall(0,-128);
     engineCore.createRamp(0,-128);
@@ -72,6 +73,8 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createWall(-128,-384);
     engineCore.createWall(0,-384);
     engineCore.createWall(128,-384);
+    engineCore.createSwitch(-128,-128);
+    
     
     
     engineCore.createCornerText();

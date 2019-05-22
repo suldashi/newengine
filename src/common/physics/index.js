@@ -2,6 +2,7 @@ const Vec2 = require("./vec2");
 const PolygonBodyComponent = require("./polygonBodyComponent");
 const PointBodyComponent = require("./pointBodyComponent");
 const PolygonRotationComponent = require("./polygonRotationComponent");
+const ColliderComponent = require("./colliderComponent");
 const checkCollision = require("./satCollisionChecker");
 
 class Physics {
@@ -9,6 +10,8 @@ class Physics {
     constructor() {
         this.bodies = [];
         this.collidingBodies = [];
+        this.colliders = [];
+        this.colliderCallbacks = {};
     }
 
     createBodyComponent(x,y,width,height) {
@@ -16,14 +19,12 @@ class Physics {
         let hh = height/2;
         let body = new PolygonBodyComponent([new Vec2(x-hw,y-hh),new Vec2(x+hw,y-hh),new Vec2(x+hw,y+hh),new Vec2(x-hw,y+hh)]);
         this.bodies.push(body);
-        this.collidingBodies.push(body);
         return body;
     }
 
     createPointBodyComponent(x,y) {
         let body = new PointBodyComponent(x,y);
         this.bodies.push(body);
-        //this.collidingBodies.push(body);
         return body;
     }
 
@@ -32,7 +33,6 @@ class Physics {
         let center = new Vec2(x,y);
         let body = new PolygonBodyComponent([center.add(hRot),center.add(hRot.rotateDeg(120)),center.add(hRot.rotateDeg(240))]);
         this.bodies.push(body);
-        //this.collidingBodies.push(body); 
         return body;
     }
 
@@ -42,15 +42,35 @@ class Physics {
         return polygonRotationComponent;
     }
 
-    checkCollisionPairs() {
-        for(var i=0;i<this.collidingBodies.length-1;i++) {
-            for(var j=i+1;j<this.collidingBodies.length;j++) {
-                if(this.collidingBodies[i].height === this.collidingBodies[j].height) {
-                    let collision = checkCollision(this.collidingBodies[i],this.collidingBodies[j]);
+    createColliderComponent(colliderTag,bodyComponent) {
+        let colliderComponent = new ColliderComponent(colliderTag,bodyComponent);
+        this.colliders.push(colliderComponent);
+        return colliderComponent;
+    }
+
+    registerCollider(firstTag,secondTag,onCollisionCallback) {
+        this.colliderCallbacks[this.getTagIndex(firstTag,secondTag)] = onCollisionCallback;
+    }
+
+    getTagIndex(firstTag,secondTag) {
+        if(firstTag>secondTag) {
+            return `${firstTag}|${secondTag}`;
+        }
+        else {
+            return `${secondTag}|${firstTag}`;
+        }
+    }
+
+    checkColliders() {
+        for(let i=0;i<this.colliders.length-1;i++) {
+            for(let j=i+1;j<this.colliders.length;j++) {
+                let firstTag = this.colliders[i].colliderTag;
+                let secondTag = this.colliders[j].colliderTag;
+                let colliderTag = this.getTagIndex(firstTag,secondTag);
+                if(this.colliderCallbacks[colliderTag]) {
+                    let collision = checkCollision(this.colliders[i].bodyComponent,this.colliders[j].bodyComponent);
                     if(collision) {
-                        collision = collision.scale(-1);
-                        this.collidingBodies[i].points = this.collidingBodies[i].points.map(x => x.add(collision));
-                        this.collidingBodies[i].center = this.collidingBodies[i].center.add(collision);
+                        this.colliderCallbacks[colliderTag](this.colliders[i],this.colliders[j],collision);
                     }
                 }
             }
@@ -61,7 +81,7 @@ class Physics {
         for(var i in this.bodies) {
             this.bodies[i].update(delta);
         }
-        this.checkCollisionPairs();
+        this.checkColliders();
     }
 }
 
