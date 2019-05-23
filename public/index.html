@@ -15,6 +15,14 @@
 	<div id="control-root">
 		<div class="control-large" style="background: url(/public/img/touch_control.png) no-repeat;background-color: lightgrey;border-radius: 20px; background-size: 50% 50%; background-position: 25px 25px;"></div>
 	</div>
+	<script id="shader" type="shader">
+		varying vec2 vTextureCoord;
+		uniform sampler2D uSampler;
+		void main(void) {
+			vec4 currentColor = texture2D(uSampler, vTextureCoord);
+			gl_FragColor = vec4(0.0, 0.0, 0.0, currentColor.a*0.2);
+		}
+	</script>
 	<script src="/public/js/pixi/pixi.min.js"></script>
 	<script src="/public/js/engine.js"></script>
 </body>
