@@ -42,7 +42,7 @@ class EngineCore {
 
     createOffSwitch(x,y) {
         let switchObject = new GameObject();
-        let bodyComponent = this.physics.createBodyComponent(x,y,64,64);
+        let bodyComponent = this.physics.createBodyComponent(x,y,48,48);
         let colliderComponent = this.physics.createColliderComponent(bodyComponent,"switch2");
         let switchComponent = this.entityFactory.createSwitchComponent();
         let renderComponent = this.renderer.createSwitchRenderComponent(bodyComponent,switchComponent);
@@ -67,7 +67,7 @@ class EngineCore {
 
     createOnSwitch(x,y) {
         let switchObject = new GameObject();
-        let bodyComponent = this.physics.createBodyComponent(x,y,64,64);
+        let bodyComponent = this.physics.createBodyComponent(x,y,48,48);
         let colliderComponent = this.physics.createColliderComponent(bodyComponent,"switch1");
         let switchComponent = this.entityFactory.createSwitchComponent(true);
         let renderComponent = this.renderer.createSwitchRenderComponent(bodyComponent,switchComponent);
