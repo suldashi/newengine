@@ -49,7 +49,7 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         this.sprite.zIndex = this.zIndex;
         this.sprite.anchor = new PIXI.ObservablePoint(null,null,0.5,0.5);
         this.sprite.scale.x = this.sprite.scale.y = this.scale;
-        this.sprite.filters = [shader];
+        //this.sprite.filters = [shader];
         if(this.reflected) {
             this.sprite.scale.x*=-1;
         }
