@@ -155,6 +155,16 @@ class EngineCore {
         this.gameObjects.push(staticObject);
     }
 
+    createPad(x,y,height = 0) {
+        let staticObject = new GameObject();
+        let bodyComponent = this.physics.createPointBodyComponent(x,y);
+        bodyComponent.height = height;
+        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"pad");
+        staticObject.attachComponent(bodyComponent);
+        staticObject.attachComponent(renderComponent);
+        this.gameObjects.push(staticObject);
+    }
+
     createPlayer(x,y) {
         let player = new GameObject();
         let w = 20;

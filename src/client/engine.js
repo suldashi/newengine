@@ -74,7 +74,7 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createOffSwitch(128,0);
     engineCore.createOnSwitch(128,-256);
     engineCore.createArrow(0,-128,0);
-    
+    engineCore.createPad(0, 0);
     
     
     engineCore.createCornerText();

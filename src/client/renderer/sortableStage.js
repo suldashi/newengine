@@ -1,5 +1,3 @@
-const sort = require("../../common/quickSort");
-
 class SortableStage {
     constructor(options) {
         this.pixiStage = options.pixiStage;

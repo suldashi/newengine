@@ -52,13 +52,17 @@ module.exports = {
     },
     sheets: 
     {
-        run:{
+        run: {
             url:"run.png",
             data:"run.json"
         },
         floor: {
             url:"floor.png",
             data:"floor.json",
+        },
+        pad: {
+            url: "pad.png",
+            data: "pad.json"
         }
     },
     animations: [
@@ -103,6 +107,12 @@ module.exports = {
             frames:["arrow_0","arrow_1","arrow_2","arrow_3"],
             speed:1/6,
             offsetY:-10,
+        },
+        {
+            baseName:"pad",
+            name:"pad",
+            frames:["pad_0","pad_1","pad_2","pad_3","pad_2","pad_1"],
+            speed:1/15,
         },
     ]
 };

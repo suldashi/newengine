@@ -1,6 +1,6 @@
 {"frames": {
 
-"pad_1.png":
+"pad_0.png":
 {
 	"frame": {"x":0,"y":0,"w":64,"h":38},
 	"rotated": false,
@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":38},
 	"sourceSize": {"w":64,"h":38}
 },
-"pad_2.png":
+"pad_1.png":
 {
 	"frame": {"x":64,"y":0,"w":64,"h":38},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":38},
 	"sourceSize": {"w":64,"h":38}
 },
-"pad_3.png":
+"pad_2.png":
 {
 	"frame": {"x":128,"y":0,"w":64,"h":38},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":38},
 	"sourceSize": {"w":64,"h":38}
 },
-"pad_4.png":
+"pad_3.png":
 {
 	"frame": {"x":192,"y":0,"w":64,"h":38},
 	"rotated": false,
@@ -33,7 +33,7 @@
 	"sourceSize": {"w":64,"h":38}
 }},
 "animations": {
-	"pad": ["pad_1.png","pad_2.png","pad_3.png","pad_4.png"]
+	"pad": ["pad_0.png","pad_1.png","pad_2.png","pad_3.png"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
