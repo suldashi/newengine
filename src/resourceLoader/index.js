@@ -1,4 +1,4 @@
-let config = require("../../common/config");
+let config = require("../config");
 const PIXI = require("../renderer/pixi");
 
 class ResourceLoader {

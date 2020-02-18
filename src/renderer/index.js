@@ -7,8 +7,8 @@ const IsometricPlayerRenderComponent = require("./isometricPlayerRenderComponent
 const IsometricStaticRenderComponent = require("./isometricStaticRenderComponent");
 const IsometricSwitchRenderComponent = require("./isometricSwitchRenderComponent");
 const TextComponent = require("./textComponent");
-const Vec2 = require("../../common/physics/vec2");
-const config = require("../../common/config");
+const Vec2 = require("../physics/vec2");
+const config = require("../config");
 
 PIXI.utils.skipHello();
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;

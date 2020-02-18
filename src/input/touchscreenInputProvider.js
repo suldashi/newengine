@@ -1,4 +1,4 @@
-const eventBus = require("../../common/event");
+const eventBus = require("../event");
 
 class TouchscreenInputProvider {
     constructor() {

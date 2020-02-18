@@ -1,9 +1,9 @@
 const MainLoop = require("mainloop.js");
-const Physics = require("../common/physics");
-const EngineCore = require("../common/entity/core");
-const SchedulerFactory = require("../common/scheduler/schedulerFactory");
-const InputFactory = require("../common/input/inputFactory");
-const EntityFactory = require("../common/entity/entityFactory");
+const Physics = require("./physics");
+const EngineCore = require("./entity/core");
+const SchedulerFactory = require("./scheduler/schedulerFactory");
+const InputFactory = require("./input/inputFactory");
+const EntityFactory = require("./entity/entityFactory");
 
 const PixiRenderer = require("./renderer");
 const KeyboardInputProvider = require("./input/keyboardInputProvider");

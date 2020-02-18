@@ -5,7 +5,7 @@ const buffer = require('vinyl-buffer');
 const source = require('vinyl-source-stream');
 
 function bundle() {
-	return browserify({entries:"src/client/engine.js",debug:false})
+	return browserify({entries:"src/engine.js",debug:false})
 		.bundle()
 		.pipe(source("engine.js"))
 		.pipe(buffer())
@@ -13,7 +13,7 @@ function bundle() {
 };
 
 function watch() {
-	return gulp.watch(["src/common/**/*.js","src/client/**/*.js"],gulp.series("dev"));
+	return gulp.watch(["src/**/*.js"],gulp.series("dev"));
 }
 
 function compress() {

@@ -1,6 +1,6 @@
 const RenderComponent = require("./renderComponent");
 const PIXI = require("./pixi");
-const event = require("../../common/event");
+const event = require("../event");
 
 class TextComponent extends RenderComponent {
     constructor(stage) {

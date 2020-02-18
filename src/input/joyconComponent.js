@@ -1,6 +1,6 @@
 //TODO: update to use eventBus
 
-const InputComponent = require("../../common/input");
+const InputComponent = require("./playerInputComponent");
 
 class JoyconComponent extends InputComponent {
     constructor() {

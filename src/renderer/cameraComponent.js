@@ -1,4 +1,4 @@
-const Vec2 = require("../../common/physics/vec2");
+const Vec2 = require("../physics/vec2");
 
 class CameraComponent {
     constructor(x,y) {
