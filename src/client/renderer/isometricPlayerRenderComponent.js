@@ -14,8 +14,6 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         this.scale = 2;
         this.reflected = this.playerComponent.isOrientedLeft;
         this.spriteName = this.playerComponent.playerState.sprite;
-        this.offsetX = 0;
-        this.offsetY = 0;
         this.isoPosition = this.bodyComponent.position.isometric();
         this.displaySprite(this.spriteName);
         
@@ -38,16 +36,15 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         this.isoPosition = this.bodyComponent.position.isometric();
         let ac = camera.cameraPosition.isometric();
         this.sprite.zIndex = this.zIndex;
-        this.sprite.x = this.isoPosition.x + ac.x + this.offsetX;
-        this.sprite.y = this.isoPosition.y + ac.y + this.offsetY - this.bodyComponent.height*RenderUtils.isoHeightAdjustmentFactor;
+        this.sprite.x = this.isoPosition.x + ac.x;
+        this.sprite.y = this.isoPosition.y + ac.y - this.bodyComponent.height*RenderUtils.isoHeightAdjustmentFactor;
     }
 
     playAnimation(animationTextures,animationSpeed) {
-        this.sheet = this.resources.sheets[this.baseName];
         this.animation = animationTextures;
         this.sprite = new PIXI.AnimatedSprite(this.animation);
         this.sprite.zIndex = this.zIndex;
-        this.sprite.anchor = new PIXI.ObservablePoint(null,null,0.5,0.5);
+        this.sprite.updateAnchor = true;
         this.sprite.scale.x = this.sprite.scale.y = this.scale;
         //this.sprite.filters = [shader];
         if(this.reflected) {
@@ -63,23 +60,7 @@ class IsometricPlayerRenderComponent extends RenderComponent {
     }
 
     displaySprite(spriteName) {
-        this.baseName = this.getSheetBaseName(spriteName);
-        this.sheet = this.resources.sheets[this.baseName];
-        let isAnimation = typeof this.resources.animations[spriteName] !== "undefined";
-        if(isAnimation) {
-            this.offsetX = this.resources.animations[spriteName].offsetX;
-            this.offsetY = this.resources.animations[spriteName].offsetY;
-            this.playAnimation(this.sheet.sheet.animations[spriteName],this.resources.animations[spriteName].speed);
-        }   
-        else {
-            this.offsetX = this.resources.images[spriteName].offsetX;
-            this.offsetY = this.resources.images[spriteName].offsetY;
-            this.playAnimation([this.resources.images[spriteName].texture],1);
-        }
-    }
-
-    getSheetBaseName(spriteName) {
-        return this.resources.animations[spriteName]?this.resources.animations[spriteName].baseName:this.resources.images[spriteName].baseName;
+        this.playAnimation(this.resources.animations[spriteName],1/6);
     }
 }
 

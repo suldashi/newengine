@@ -47,8 +47,9 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createMiniBlock(-256,-128);
 
     engineCore.createBlock(-256,-256);
-    */
     
+    
+    */
     engineCore.createPlayer(0,0);
     engineCore.createWall(0,-128);
     engineCore.createFloor(0,0);
@@ -75,7 +76,9 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createOnSwitch(128,-256);
     engineCore.createArrow(0,-128,0);
     engineCore.createPad(0, 0);
-    
+
+   
+   
     
     engineCore.createCornerText();
     
