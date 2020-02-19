@@ -11,7 +11,7 @@ class IsometricPlayerRenderComponent extends RenderComponent {
 
         this.resources = resources;
         this.stage = stage;
-        this.scale = 2;
+        this.scale = 4;
         this.reflected = this.playerComponent.isOrientedLeft;
         this.spriteName = this.playerComponent.playerState.sprite;
         this.isoPosition = this.bodyComponent.position.isometric();

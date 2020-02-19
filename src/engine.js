@@ -23,7 +23,7 @@ resourceLoader.loadAllResources().then((resources) => {
         new EntityFactory(),
         new InputFactory()
     );
-    /*
+    
     engineCore.createFloor(256,256);
 
     engineCore.createFloor(128,256);
@@ -49,8 +49,9 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createBlock(-256,-256);
     
     
-    */
+    
     engineCore.createPlayer(0,0);
+    /*
     engineCore.createWall(0,-128);
     engineCore.createFloor(0,0);
     engineCore.createFloor(128,0);
@@ -76,7 +77,7 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createOnSwitch(128,-256);
     engineCore.createArrow(0,-128,0);
     engineCore.createPad(0, 0);
-
+    */
    
    
     

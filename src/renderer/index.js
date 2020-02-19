@@ -21,6 +21,8 @@ class PixiRenderer {
         this.app = new PIXI.Application({width: this.width, height: this.height});
         this.app.renderer.backgroundColor = 0xDBB691;
         this.app.stage.sortableChildren = true;
+        this.graphics = new PIXI.Graphics();
+        this.app.stage.addChild(this.graphics);
         this.sortableStage = new SortableStage({
             pixiStage:this.app.stage,
             width:this.width,
@@ -31,10 +33,11 @@ class PixiRenderer {
         this.renderComponents = [];
         this.parentElement.appendChild(this.app.view);
         this.resources = resources;
+        
     }
 
     createPolygonRenderComponent(bodyComponent) {
-        let renderComponent = new IsometricPolygonRenderComponent(bodyComponent,this.sortableStage);
+        let renderComponent = new IsometricPolygonRenderComponent(bodyComponent,this.graphics);
         this.sortableStage.addRenderComponent(renderComponent);
         return renderComponent;
     }
@@ -73,6 +76,7 @@ class PixiRenderer {
 
     drawFrame() {
         requestAnimationFrame(() => {
+            this.graphics.clear();
             this.activeCamera.update().negateAndMove(this.screenCenter);
             this.sortableStage.updateAll(this.activeCamera);
         });   

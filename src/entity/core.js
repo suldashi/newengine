@@ -143,7 +143,7 @@ class EngineCore {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
         bodyComponent.height = height;
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"arrow");
+        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"tp_in");
         eventBus.on("switchOff",() => {
             renderComponent.sprite.play();
         });
@@ -176,6 +176,7 @@ class EngineCore {
         let playerInputComponent = this.inputFactory.createPlayerInputComponent();
         let renderComponent = this.renderer.createPlayerRenderComponent(bodyComponent,playerComponent);
         let colliderComponent = this.physics.createColliderComponent(bodyComponent,"player");
+        //let outlineRenderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
         this.renderer.setActiveCamera(cameraComponent);
         player.attachComponent(playerBodyComponent);
         player.attachComponent(playerComponent);
@@ -183,6 +184,7 @@ class EngineCore {
         player.attachComponent(renderComponent);
         player.attachComponent(playerInputComponent);
         player.attachComponent(colliderComponent);
+        //player.attachComponent(outlineRenderComponent);
         this.gameObjects.push(player);
     }
 
