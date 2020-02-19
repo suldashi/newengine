@@ -45,7 +45,7 @@ class IsometricStaticRenderComponent extends RenderComponent {
     }
 
     displaySprite(spriteName) {
-        this.playAnimation(this.resources.animations[spriteName],1/6);
+        this.playAnimation(this.resources.animations[spriteName],1/4);
     }
 }
 

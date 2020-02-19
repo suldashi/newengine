@@ -31,12 +31,7 @@ class ResourceLoader {
                     this.resources.animations[i] = sheet.animations[i];
                 }
                 for(var i in sheet.textures) {
-                    let textureName = "";
-                    let parts = i.split(".");
-                    for(var j=0; j < parts.length - 1; j++) {
-                        textureName+=parts[j] + ".";
-                    }
-                    textureName = textureName.substring(0, textureName.length - 1);
+                    let textureName = this.removeFileExtension(i);
                     this.resources.animations[textureName] = [sheet.textures[i]];
                 }
                 resolve(this.resources.sheets[sheetName]);
@@ -55,6 +50,10 @@ class ResourceLoader {
 
     loadAllSheets() {
         return Promise.all(this.sheets.map(el => this.addSheet(el)));
+    }
+
+    removeFileExtension(filename){
+        return filename.substring(0, filename.lastIndexOf('.')) || filename;
     }
 
 }
