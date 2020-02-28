@@ -1,6 +1,6 @@
 class Scheduler {
     constructor(schedulerFactory) {
-        this.schedulerFactory = schedulerFactory;
+        this.system = schedulerFactory;
         this.accumulatedTime = 0;
         this.started = false;
         this.ended = false;
@@ -13,7 +13,7 @@ class Scheduler {
     update(deltaInMilliseconds) {
         if(this.started && !this.ended) {
             this.accumulatedTime+=deltaInMilliseconds;
-            while(this.accumulatedTime>this.tasks[this.taskIndex].time && !this.ended) {
+            while(!this.ended && this.accumulatedTime>this.tasks[this.taskIndex].time) {
                 this.tasks[this.taskIndex].callback();
                 this.taskIndex++;
                 if(this.taskIndex===this.tasks.length) {

@@ -1,6 +1,5 @@
 let config = {
     debug: false,
-    imageRoot: "/public/img",
     spriteRoot:"/public/sprites",
     hres:1920,
     vres:1080,

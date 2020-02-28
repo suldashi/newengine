@@ -30,6 +30,7 @@ class EngineCore {
         let tmp = this.altScene;
         this.altScene = this.activeScene;
         this.activeScene = tmp;
+        this.renderer.swapScene();
     }
 
     createCornerText() {
@@ -170,13 +171,20 @@ class EngineCore {
         let bodyComponent = this.physics.createBodyComponent(x,y,48,48);
         let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"npc");
         let colliderComponent = this.collisionSystem.createCollisionComponent(bodyComponent,"npc");
+        let scheduler = this.schedulerFactory.createScheduler();
+        scheduler.addTask(1000, () => {
+            this.swapScene();
+        })
         renderComponent.scale = 2;
         this.collisionSystem.registerCollider("player","npc",() => {
             this.renderer.enableShader();
+            scheduler.start();
+            console.log("ASD");
         });
         npc.attachComponent(bodyComponent);
         npc.attachComponent(renderComponent);
         npc.attachComponent(colliderComponent);
+        npc.attachComponent(scheduler);
         this.activeScene.addGameObject(npc);
     }
 
