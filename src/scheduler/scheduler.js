@@ -1,5 +1,6 @@
 class Scheduler {
-    constructor() {
+    constructor(schedulerFactory) {
+        this.schedulerFactory = schedulerFactory;
         this.accumulatedTime = 0;
         this.started = false;
         this.ended = false;

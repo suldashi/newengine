@@ -2,22 +2,25 @@ const GameObject = require("./gameObject");
 const eventBus = require("../event");
 
 class EngineCore {
-    constructor(physics,renderer,schedulerFactory,entityFactory,inputFactory) {
+    constructor(sceneManager,physics, collisionSystem, renderer,schedulerFactory,entityFactory,inputFactory) {
+        this.sceneManager = sceneManager;
         this.physics = physics;
+        this.collisionSystem = collisionSystem;
         this.renderer = renderer;
         this.schedulerFactory = schedulerFactory;
         this.entityFactory = entityFactory;
         this.inputFactory = inputFactory;
         this.gameObjects = [];
-        this.physics.registerCollider("player","wall",(firstCollider,secondCollider,collisionVector) => {
-            if(firstCollider.colliderTag === "player") {
+        this.activeScene = this.sceneManager.createSceneComponent();
+        this.collisionSystem.registerCollider("player", "wall", (firstCollisionComponent, secondCollisionComponent, collisionVector) => {
+            if(firstCollisionComponent.collisionTag === "player") {
                 let reverseCollisionVector = collisionVector.scale(-1);
-                firstCollider.bodyComponent.points = firstCollider.bodyComponent.points.map(x => x.add(reverseCollisionVector));
-                firstCollider.bodyComponent.center = firstCollider.bodyComponent.center.add(reverseCollisionVector);
+                firstCollisionComponent.bodyComponent.points = firstCollisionComponent.bodyComponent.points.map(x => x.add(reverseCollisionVector));
+                firstCollisionComponent.bodyComponent.center = firstCollisionComponent.bodyComponent.center.add(reverseCollisionVector);
             }
             else {
-                secondCollider.bodyComponent.points = secondCollider.bodyComponent.points.map(x => x.add(collisionVector));
-                secondCollider.bodyComponent.center = secondCollider.bodyComponent.center.add(collisionVector);
+                secondCollisionComponent.bodyComponent.points = secondCollisionComponent.bodyComponent.points.map(x => x.add(collisionVector));
+                secondCollisionComponent.bodyComponent.center = secondCollisionComponent.bodyComponent.center.add(collisionVector);
             }
         });
     }
@@ -26,7 +29,7 @@ class EngineCore {
         let textObject = new GameObject();
         let textComponent = this.renderer.createTextComponent();
         textObject.attachComponent(textComponent);
-        this.gameObjects.push(textObject);
+        this.activeScene.addGameObject(textObject);
     }
 
     createStatic(x,y,w,h) {
@@ -37,16 +40,16 @@ class EngineCore {
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
         staticObject.attachComponent(polygonRotationComponent);
-        this.gameObjects.push(staticObject);
+        this.activeScene.addGameObject(staticObject);
     }
 
     createOffSwitch(x,y) {
         let switchObject = new GameObject();
         let bodyComponent = this.physics.createBodyComponent(x,y,48,48);
-        let colliderComponent = this.physics.createColliderComponent(bodyComponent,"switch2");
+        let colliderComponent = this.collisionSystem.createCollisionComponent(bodyComponent,"switch2");
         let switchComponent = this.entityFactory.createSwitchComponent();
         let renderComponent = this.renderer.createSwitchRenderComponent(bodyComponent,switchComponent);
-        this.physics.registerCollider("player","switch2",() => {
+        this.collisionSystem.registerCollider("player","switch2",() => {
             eventBus.emit("playerOnSwitch2");
         });
         eventBus.on("playerOnSwitch2",() => {
@@ -62,16 +65,16 @@ class EngineCore {
         switchObject.attachComponent(colliderComponent);
         switchObject.attachComponent(renderComponent);
         switchObject.attachComponent(switchComponent);
-        this.gameObjects.push(switchObject);
+        this.activeScene.addGameObject(switchObject);
     }
 
     createOnSwitch(x,y) {
         let switchObject = new GameObject();
         let bodyComponent = this.physics.createBodyComponent(x,y,48,48);
-        let colliderComponent = this.physics.createColliderComponent(bodyComponent,"switch1");
+        let colliderComponent = this.collisionSystem.createCollisionComponent(bodyComponent,"switch1");
         let switchComponent = this.entityFactory.createSwitchComponent(true);
         let renderComponent = this.renderer.createSwitchRenderComponent(bodyComponent,switchComponent);
-        this.physics.registerCollider("player","switch1",() => {
+        this.collisionSystem.registerCollider("player","switch1",() => {
             eventBus.emit("playerOnSwitch1");
         });
         eventBus.on("playerOnSwitch1",() => {
@@ -87,18 +90,18 @@ class EngineCore {
         switchObject.attachComponent(colliderComponent);
         switchObject.attachComponent(renderComponent);
         switchObject.attachComponent(switchComponent);
-        this.gameObjects.push(switchObject);
+        this.activeScene.addGameObject(switchObject);
     }
 
     createWall(x,y) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createBodyComponent(x,y,128,128);
-        let colliderComponent = this.physics.createColliderComponent(bodyComponent,"wall");
+        let colliderComponent = this.collisionSystem.createCollisionComponent(bodyComponent,"wall");
         //let renderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(colliderComponent);
         //staticObject.attachComponent(renderComponent);
-        this.gameObjects.push(staticObject);
+        this.activeScene.addGameObject(staticObject);
     }
 
     createFloor(x,y) {
@@ -107,7 +110,7 @@ class EngineCore {
         let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"floor_N");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
-        this.gameObjects.push(staticObject);
+        this.activeScene.addGameObject(staticObject);
     }
 
     createBlock(x,y,height = 0) {
@@ -117,7 +120,7 @@ class EngineCore {
         let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"block_N");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
-        this.gameObjects.push(staticObject);
+        this.activeScene.addGameObject(staticObject);
     }
 
     createMiniBlock(x,y) {
@@ -126,7 +129,7 @@ class EngineCore {
         let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"half_N");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
-        this.gameObjects.push(staticObject);
+        this.activeScene.addGameObject(staticObject);
     }
 
     createRamp(x,y,height = 0) {
@@ -136,14 +139,14 @@ class EngineCore {
         let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"slopeHalf_S");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
-        this.gameObjects.push(staticObject);
+        this.activeScene.addGameObject(staticObject);
     }
 
     createArrow(x,y,height = 0) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
         bodyComponent.height = height;
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"tp_in");
+        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"arrow");
         eventBus.on("switchOff",() => {
             renderComponent.sprite.play();
         });
@@ -152,7 +155,22 @@ class EngineCore {
         });
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
-        this.gameObjects.push(staticObject);
+        this.activeScene.addGameObject(staticObject);
+    }
+
+    createNPC(x,y) {
+        let npc = new GameObject();
+        let bodyComponent = this.physics.createBodyComponent(x,y,48,48);
+        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"npc");
+        let colliderComponent = this.collisionSystem.createCollisionComponent(bodyComponent,"npc");
+        renderComponent.scale = 2;
+        this.collisionSystem.registerCollider("player","npc",() => {
+            this.renderer.enableShader();
+        });
+        npc.attachComponent(bodyComponent);
+        npc.attachComponent(renderComponent);
+        npc.attachComponent(colliderComponent);
+        this.activeScene.addGameObject(npc);
     }
 
     createPad(x,y,height = 0) {
@@ -162,7 +180,7 @@ class EngineCore {
         let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"pad");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
-        this.gameObjects.push(staticObject);
+        this.activeScene.addGameObject(staticObject);
     }
 
     createPlayer(x,y) {
@@ -174,10 +192,11 @@ class EngineCore {
         let cameraComponent = this.renderer.createCameraComponent(bodyComponent);
         let playerComponent = this.entityFactory.createPlayerComponent();
         let playerInputComponent = this.inputFactory.createPlayerInputComponent();
-        let renderComponent = this.renderer.createPlayerRenderComponent(bodyComponent,playerComponent);
-        let colliderComponent = this.physics.createColliderComponent(bodyComponent,"player");
+        let renderComponent = this.renderer.createPlayerRenderComponent(bodyComponent, playerComponent);
+        let colliderComponent = this.collisionSystem.createCollisionComponent(bodyComponent, "player");
         //let outlineRenderComponent = this.renderer.createPolygonRenderComponent(bodyComponent);
         this.renderer.setActiveCamera(cameraComponent);
+        player.attachComponent(bodyComponent);
         player.attachComponent(playerBodyComponent);
         player.attachComponent(playerComponent);
         player.attachComponent(cameraComponent);
@@ -185,7 +204,7 @@ class EngineCore {
         player.attachComponent(playerInputComponent);
         player.attachComponent(colliderComponent);
         //player.attachComponent(outlineRenderComponent);
-        this.gameObjects.push(player);
+        this.activeScene.addGameObject(player);
     }
 
     createStaticTriangle(x,y,h) {
@@ -196,7 +215,7 @@ class EngineCore {
         triangle.attachComponent(bodyComponent);
         triangle.attachComponent(renderComponent);
         triangle.attachComponent(polygonRotationComponent);
-        this.gameObjects.push(triangle);
+        this.activeScene.addGameObject(triangle);
     }
 
     createScheduler() {
@@ -205,10 +224,16 @@ class EngineCore {
     }
 
     update(delta) {
-        this.schedulerFactory.update(delta*1000);
-        this.inputFactory.update(delta);
-        this.physics.update(delta);
-        this.entityFactory.update(delta);
+        let schedulerComponents = this.activeScene.getComponentsBySystem(this.schedulerFactory);
+        this.schedulerFactory.update(schedulerComponents, delta*1000);
+        let inputComponents = this.activeScene.getComponentsBySystem(this.inputFactory);
+        this.inputFactory.update(inputComponents, delta);
+        let physicsComponents = this.activeScene.getComponentsBySystem(this.physics);
+        this.physics.update(physicsComponents, delta);
+        let collisionComponents = this.activeScene.getComponentsBySystem(this.collisionSystem);
+        this.collisionSystem.update(collisionComponents);
+        let entities = this.activeScene.getComponentsBySystem(this.entityFactory);
+        this.entityFactory.update(entities, delta);
     }
 }
 

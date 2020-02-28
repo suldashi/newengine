@@ -1,6 +1,5 @@
 const PlayerComponent = require("./player");
 const PlayerBodyComponent = require("./player/playerBodyComponent");
-const PlayerPolygonComponent = require("./player/playerPolygonComponent");
 const SwitchComponent = require("./switchComponent");
 
 class EntityFactory {
@@ -9,31 +8,25 @@ class EntityFactory {
     }
 
     createPlayerComponent(inputComponent) {
-        let playerComponent = new PlayerComponent(inputComponent);
+        let playerComponent = new PlayerComponent(inputComponent, this);
         this.components.push(playerComponent);
         return playerComponent;
     }
 
     createPlayerBodyComponent(bodyComponent) {
-        let playerBodyComponent = new PlayerBodyComponent(bodyComponent);
+        let playerBodyComponent = new PlayerBodyComponent(bodyComponent, this);
         this.components.push(playerBodyComponent);
         return playerBodyComponent;
     }
 
-    createPlayerPolygonComponent(polygonComponent) {
-        let playerPolygonComponent = new PlayerPolygonComponent(polygonComponent);
-        this.components.push(playerPolygonComponent);
-        return playerPolygonComponent;
-    }
-
     createSwitchComponent(isOn) {
-        let switchComponent = new SwitchComponent(isOn);
+        let switchComponent = new SwitchComponent(isOn, this);
         return switchComponent;
     }
 
-    update(delta) {
-        for(var i in this.components) {
-            this.components[i].update(delta);
+    update(entities, delta) {
+        for(var i in entities) {
+            entities[i].update(delta);
         }
     }
 }

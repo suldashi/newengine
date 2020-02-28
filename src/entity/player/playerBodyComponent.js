@@ -2,7 +2,8 @@ const eventBus = require("../../event");
 const Vec2 = require("../../physics/vec2");
 
 class PlayerBodyComponent {
-    constructor(bodyComponent) {
+    constructor(bodyComponent, entityFactory) {
+        this.system = entityFactory;
         this.bodyComponent = bodyComponent;
         this.speed = 160;
         this.diagonalSpeed = this.speed/Math.sqrt(2);

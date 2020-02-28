@@ -5,7 +5,8 @@ const switchToRunningState = require("./playerState").switchToRunningState;
 
 class PlayerComponent {
 
-    constructor() {
+    constructor(entityFactory) {
+        this.entityFactory = entityFactory;
         this.playerState = new IdleState(this);
         eventBus.on("newPlayerControls",(inputs) => {
             this.handleInputs(inputs);

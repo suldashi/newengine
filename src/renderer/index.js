@@ -6,6 +6,7 @@ const IsometricPolygonRenderComponent = require("./isometricPolygonRenderCompone
 const IsometricPlayerRenderComponent = require("./isometricPlayerRenderComponent");
 const IsometricStaticRenderComponent = require("./isometricStaticRenderComponent");
 const IsometricSwitchRenderComponent = require("./isometricSwitchRenderComponent");
+const ShaderComponent = require("./shaderComponent");
 const TextComponent = require("./textComponent");
 const Vec2 = require("../physics/vec2");
 const config = require("../config");
@@ -30,10 +31,9 @@ class PixiRenderer {
         });
         this.activeCamera = new CameraComponent(0,0);
         this.screenCenter = new Vec2(this.width/2,this.height/2);
-        this.renderComponents = [];
         this.parentElement.appendChild(this.app.view);
         this.resources = resources;
-        
+        this.shader = null;
     }
 
     createPolygonRenderComponent(bodyComponent) {
@@ -74,11 +74,22 @@ class PixiRenderer {
         this.activeCamera = cameraComponent;
     }
 
+    enableShader() {
+        if(!this.isShaderEnabled) {
+            this.isShaderEnabled = true;
+            this.shader = new ShaderComponent();
+            this.app.stage.filters = [this.shader.shader];
+        }
+    }
+
     drawFrame() {
         requestAnimationFrame(() => {
             this.graphics.clear();
             this.activeCamera.update().negateAndMove(this.screenCenter);
             this.sortableStage.updateAll(this.activeCamera);
+            if(this.shader) {
+                this.shader.update();
+            }
         });   
     }
 }

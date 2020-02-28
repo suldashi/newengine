@@ -1,7 +1,8 @@
 const Vec2 = require("./vec2");
 
 class PolygonBodyComponent {
-    constructor(x,y) {
+    constructor(x,y, physicsSystem) {
+        this.system = physicsSystem;
         this.position = new Vec2(x,y);
         this.velocity = new Vec2(0,0);
         this.height = 0;

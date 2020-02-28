@@ -1,5 +1,4 @@
 const RenderComponent = require("./renderComponent");
-const PIXI = require("./pixi");
 
 class IsometricPolygonRenderComponent extends RenderComponent {
     constructor(bodyComponent, graphics) {

@@ -1,5 +1,6 @@
 class SwitchComponent {
-    constructor(isOn = false) {
+    constructor(isOn = false, entityFactory) {
+        this.entityFactory = entityFactory;
         this.isOn = isOn;
     }
 

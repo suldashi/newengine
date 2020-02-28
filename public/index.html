@@ -18,9 +18,13 @@
 	<script id="shader" type="shader">
 		varying vec2 vTextureCoord;
 		uniform sampler2D uSampler;
+		uniform float delta;
 		void main(void) {
 			vec4 currentColor = texture2D(uSampler, vTextureCoord);
-			gl_FragColor = vec4(0.0, 0.0, 0.0, currentColor.a*0.2);
+			if(currentColor.a != 0.0) {
+				currentColor = vec4(currentColor.r + delta, currentColor.g + delta, currentColor.b + delta, currentColor.a);
+			}
+			gl_FragColor = currentColor;
 		}
 	</script>
 	<script src="/public/js/pixi/pixi.min.js"></script>

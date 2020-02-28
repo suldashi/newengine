@@ -1,10 +1,11 @@
 const MainLoop = require("mainloop.js");
 const Physics = require("./physics");
+const CollisionSystem = require("./collision/collisionSystem");
+const SceneManager = require("./scene/sceneManager");
 const EngineCore = require("./entity/core");
 const SchedulerFactory = require("./scheduler/schedulerFactory");
 const InputFactory = require("./input/inputFactory");
 const EntityFactory = require("./entity/entityFactory");
-
 const PixiRenderer = require("./renderer");
 const KeyboardInputProvider = require("./input/keyboardInputProvider");
 const TouchscreenInputProvider = require("./input/touchscreenInputProvider");
@@ -17,13 +18,15 @@ resourceLoader.loadAllResources().then((resources) => {
     let keyboardInputProvider = new KeyboardInputProvider();
     let touchscreenInputProvider = new TouchscreenInputProvider();  //even though they are just initialized, these objects emit events caught by handlers elsewhere
     let engineCore = new EngineCore(
+        new SceneManager(),
         new Physics(),
+        new CollisionSystem(),
         renderer,
         new SchedulerFactory(),
         new EntityFactory(),
         new InputFactory()
     );
-    
+    /*
     engineCore.createFloor(256,256);
 
     engineCore.createFloor(128,256);
@@ -49,9 +52,9 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createBlock(-256,-256);
     
     
-    
+    */
     engineCore.createPlayer(0,0);
-    /*
+    engineCore.createNPC(-128,-128);
     engineCore.createWall(0,-128);
     engineCore.createFloor(0,0);
     engineCore.createFloor(128,0);
@@ -77,7 +80,7 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createOnSwitch(128,-256);
     engineCore.createArrow(0,-128,0);
     engineCore.createPad(0, 0);
-    */
+
    
    
     

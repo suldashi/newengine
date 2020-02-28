@@ -5,15 +5,15 @@ class InputFactory {
         this.components = [];    
     }
 
-    createPlayerInputComponent(playerComponent) {
-        let playerInputComponent = new PlayerInputComponent(playerComponent);
+    createPlayerInputComponent() {
+        let playerInputComponent = new PlayerInputComponent(this);
         this.components.push(playerInputComponent);
         return playerInputComponent;
     }
 
-    update(delta) {
-        for(var i in this.components) {
-            this.components[i].update(delta);
+    update(inputComponents, delta) {
+        for(var i in inputComponents) {
+            inputComponents[i].update(delta);
         }
     }
 }

@@ -13,7 +13,6 @@ class IsometricSwitchRenderComponent extends RenderComponent {
         this.spriteName = switchComponent.spriteName;
         this.isoPosition = this.bodyComponent.position.isometric();
         this.displaySprite(this.spriteName);
-        
     }
 
     get zIndex() {

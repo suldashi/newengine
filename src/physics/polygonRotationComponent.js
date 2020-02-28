@@ -1,7 +1,8 @@
 const Vec2 = require("./vec2");
 
 class PolygonRotationComponent {
-    constructor(polygonComponent) {
+    constructor(polygonComponent, physicsSystem) {
+        this.system = physicsSystem;
         this.polygonComponent = polygonComponent;
         this.angularVelocity = Math.PI;
     }

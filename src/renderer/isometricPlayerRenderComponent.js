@@ -1,7 +1,6 @@
 const RenderComponent = require("./renderComponent");
 const PIXI = require("./pixi");
 const RenderUtils = require("./renderUtils");
-const shader = require("./shader");
 
 class IsometricPlayerRenderComponent extends RenderComponent {
     constructor(bodyComponent,playerComponent,resources,stage) {
@@ -11,12 +10,11 @@ class IsometricPlayerRenderComponent extends RenderComponent {
 
         this.resources = resources;
         this.stage = stage;
-        this.scale = 4;
+        this.scale = 2;
         this.reflected = this.playerComponent.isOrientedLeft;
         this.spriteName = this.playerComponent.playerState.sprite;
         this.isoPosition = this.bodyComponent.position.isometric();
         this.displaySprite(this.spriteName);
-        
     }
 
     get zIndex() {
@@ -46,7 +44,6 @@ class IsometricPlayerRenderComponent extends RenderComponent {
         this.sprite.zIndex = this.zIndex;
         this.sprite.updateAnchor = true;
         this.sprite.scale.x = this.sprite.scale.y = this.scale;
-        //this.sprite.filters = [shader];
         if(this.reflected) {
             this.sprite.scale.x*=-1;
         }

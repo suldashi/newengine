@@ -1,7 +1,8 @@
 const eventBus = require("../event");
 
 class PlayerInputComponent {
-    constructor() {
+    constructor(inputFactory) {
+        this.system = inputFactory;
         this.up = false;
         this.down = false;
         this.left = false;

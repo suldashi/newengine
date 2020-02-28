@@ -6,6 +6,10 @@ class SortableStage {
         this.renderComponents = [];
     }
 
+    enableShader() {
+        this.pixiStage.filters = [shader];
+    }
+
     addRenderComponent(renderComponent) {
         this.renderComponents.push(renderComponent);
     }

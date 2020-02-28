@@ -128,7 +128,7 @@
 }},
 "animations": {
 	"arrow": ["arrow_0.png","arrow_1.png","arrow_2.png","arrow_3.png"],
-	"pad": ["pad_1.png","pad_2.png","pad_3.png","pad_4.png"]
+	"pad": ["pad_1.png","pad_2.png","pad_3.png","pad_4.png","pad_3.png","pad_2.png"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",

@@ -8,11 +8,15 @@ class IsometricStaticRenderComponent extends RenderComponent {
         this.bodyComponent = bodyComponent;
         this.resources = resources;
         this.stage = stage;
-        this.scale = 1;
+        this._scale = 1;
         this.spriteName = spriteName;
         this.isoPosition = this.bodyComponent.position.isometric();
         this.displaySprite(this.spriteName);
-        
+    }
+
+    set scale(spriteScale) {
+        this._scale = spriteScale;
+        this.sprite.scale.x = this.sprite.scale.y = this._scale;
     }
 
     get zIndex() {
@@ -34,7 +38,7 @@ class IsometricStaticRenderComponent extends RenderComponent {
         this.animation = animationTextures;
         this.sprite = new PIXI.AnimatedSprite(this.animation);
         this.sprite.updateAnchor = true;
-        this.sprite.scale.x = this.sprite.scale.y = this.scale;
+        this.sprite.scale.x = this.sprite.scale.y = this._scale;
         this.sprite.animationSpeed = animationSpeed;
         this.sprite.play();
         this.stage.pixiStage.addChild(this.sprite);
@@ -45,7 +49,7 @@ class IsometricStaticRenderComponent extends RenderComponent {
     }
 
     displaySprite(spriteName) {
-        this.playAnimation(this.resources.animations[spriteName],1/4);
+        this.playAnimation(this.resources.animations[spriteName],1/10);
     }
 }
 

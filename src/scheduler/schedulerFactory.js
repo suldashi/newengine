@@ -6,14 +6,14 @@ class SchedulerFactory {
     }
 
     createScheduler() {
-        let scheduler = new Scheduler();
+        let scheduler = new Scheduler(this);
         this.schedulers.push(scheduler);
         return scheduler;
     }
 
-    update(deltaInMilliseconds) {
-        for(var i in this.schedulers) {
-            this.schedulers[i].update(deltaInMilliseconds);
+    update(schedulerComponents, deltaInMilliseconds) {
+        for(var i in schedulerComponents) {
+            schedulerComponents[i].update(deltaInMilliseconds);
         }
     }
 }
