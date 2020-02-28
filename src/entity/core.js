@@ -179,7 +179,6 @@ class EngineCore {
         this.collisionSystem.registerCollider("player","npc",() => {
             this.renderer.enableShader();
             scheduler.start();
-            console.log("ASD");
         });
         npc.attachComponent(bodyComponent);
         npc.attachComponent(renderComponent);
