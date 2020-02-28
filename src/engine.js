@@ -26,7 +26,22 @@ resourceLoader.loadAllResources().then((resources) => {
         new EntityFactory(),
         new InputFactory()
     );
-    /*
+
+    window.core = engineCore;
+
+    addToScene(engineCore);
+    engineCore.swapScene();
+    addToAltScene(engineCore);
+    engineCore.swapScene();
+    MainLoop.setUpdate((delta) => {
+        let scaledDelta = delta/1000;
+        engineCore.update(scaledDelta);
+    }).setDraw(() => {
+        renderer.drawFrame();
+    }).start();
+});
+
+function addToAltScene(engineCore) {
     engineCore.createFloor(256,256);
 
     engineCore.createFloor(128,256);
@@ -50,9 +65,10 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createMiniBlock(-256,-128);
 
     engineCore.createBlock(-256,-256);
-    
-    
-    */
+    engineCore.createPlayer(0,0);
+}
+
+function addToScene(engineCore) {
     engineCore.createPlayer(0,0);
     engineCore.createNPC(-128,-128);
     engineCore.createWall(0,-128);
@@ -80,16 +96,5 @@ resourceLoader.loadAllResources().then((resources) => {
     engineCore.createOnSwitch(128,-256);
     engineCore.createArrow(0,-128,0);
     engineCore.createPad(0, 0);
-
-   
-   
-    
     engineCore.createCornerText();
-    
-    MainLoop.setUpdate((delta) => {
-        let scaledDelta = delta/1000;
-        engineCore.update(scaledDelta);
-    }).setDraw(() => {
-        renderer.drawFrame();
-    }).start();
-});
+}

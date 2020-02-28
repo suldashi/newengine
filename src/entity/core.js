@@ -12,6 +12,7 @@ class EngineCore {
         this.inputFactory = inputFactory;
         this.gameObjects = [];
         this.activeScene = this.sceneManager.createSceneComponent();
+        this.altScene = this.sceneManager.createSceneComponent();
         this.collisionSystem.registerCollider("player", "wall", (firstCollisionComponent, secondCollisionComponent, collisionVector) => {
             if(firstCollisionComponent.collisionTag === "player") {
                 let reverseCollisionVector = collisionVector.scale(-1);
@@ -23,6 +24,12 @@ class EngineCore {
                 secondCollisionComponent.bodyComponent.center = secondCollisionComponent.bodyComponent.center.add(collisionVector);
             }
         });
+    }
+
+    swapScene() {
+        let tmp = this.altScene;
+        this.altScene = this.activeScene;
+        this.activeScene = tmp;
     }
 
     createCornerText() {
