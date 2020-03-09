@@ -27,14 +27,14 @@ class EngineCore {
     }
 
     createBattlefield() {
-        let xOffset = 480;
-        let yOffset = 252;
+        let xOffset = 320;
+        let yOffset = 348;
         let panelComponent = new GameObject();
         for(var i = 0; i < 4; i++) {
             for(var j = 0; j < 4; j++) {
-                let bodyComponent = this.physics.createPointBodyComponent(i*120 + xOffset, j*72 + yOffset);
+                let bodyComponent = this.physics.createPointBodyComponent(i*160 + xOffset, j*96 + yOffset);
                 let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"panel_2");
-                renderComponent.scale = 3;
+                renderComponent.scale = 4;
                 this.renderer.setStaticCamera();
                 panelComponent.attachComponent(bodyComponent);
                 panelComponent.attachComponent(renderComponent);
@@ -43,9 +43,9 @@ class EngineCore {
         }
         for(var i = 0; i < 4; i++) {
             for(var j = 0; j < 4; j++) {
-                let bodyComponent = this.physics.createPointBodyComponent(i*120 + 480 + xOffset, j*72 + yOffset);
+                let bodyComponent = this.physics.createPointBodyComponent(i*160 + 640 + xOffset, j*96 + yOffset);
                 let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"panel_1");
-                renderComponent.scale = 3;
+                renderComponent.scale = 4;
                 this.renderer.setStaticCamera();
                 panelComponent.attachComponent(bodyComponent);
                 panelComponent.attachComponent(renderComponent);
