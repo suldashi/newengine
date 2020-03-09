@@ -1,10 +1,11 @@
 const PIXI = require("./pixi");
 const RendererScene = require("./rendererScene");
-const CameraComponent = require("./cameraComponent");
+const StaticCameraComponent = require("./staticCameraComponent");
 const InverseIsometricBodyCameraComponent = require("./inverseIsometricBodyCameraComponent");
 const IsometricPolygonRenderComponent = require("./isometricPolygonRenderComponent");
 const IsometricPlayerRenderComponent = require("./isometricPlayerRenderComponent");
 const IsometricStaticRenderComponent = require("./isometricStaticRenderComponent");
+const StaticRenderComponent = require("./staticRenderComponent");
 const IsometricSwitchRenderComponent = require("./isometricSwitchRenderComponent");
 const ShaderComponent = require("./shaderComponent");
 const TextComponent = require("./textComponent");
@@ -43,8 +44,14 @@ class PixiRenderer {
         return renderComponent;
     }
 
-    createStaticRenderComponent(bodyComponent,textureName,height) {
+    createIsometricStaticRenderComponent(bodyComponent,textureName,height) {
         let renderComponent = new IsometricStaticRenderComponent(bodyComponent,this.resources,this.activeScene,textureName,height);
+        this.activeScene.addRenderComponent(renderComponent);
+        return renderComponent;
+    }
+
+    createStaticRenderComponent(bodyComponent,textureName,height) {
+        let renderComponent = new StaticRenderComponent(bodyComponent,this.resources,this.activeScene,textureName,height);
         this.activeScene.addRenderComponent(renderComponent);
         return renderComponent;
     }
@@ -73,6 +80,10 @@ class PixiRenderer {
 
     setActiveCamera(cameraComponent) {
         this.activeScene.activeCamera = cameraComponent;
+    }
+
+    setStaticCamera() {
+        this.activeScene.activeCamera = new StaticCameraComponent();
     }
 
     enableShader() {

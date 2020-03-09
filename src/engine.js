@@ -42,30 +42,8 @@ resourceLoader.loadAllResources().then((resources) => {
 });
 
 function addToAltScene(engineCore) {
-    engineCore.createFloor(256,256);
-
-    engineCore.createFloor(128,256);
-    engineCore.createRamp(256,128);
-
-    engineCore.createFloor(128,128);
-    engineCore.createMiniBlock(256,0);
-
-    engineCore.createFloor(128,0);
-    engineCore.createMiniBlock(256,-128);
-
-    engineCore.createFloor(0,0);
-    engineCore.createMiniBlock(128,-128);
-    
-    engineCore.createMiniBlock(-128,0);
-    engineCore.createBlock(0,-128);
-
-    engineCore.createBlock(-128,-128);
-    
-    engineCore.createBlock(-128,-256);
-    engineCore.createMiniBlock(-256,-128);
-
-    engineCore.createBlock(-256,-256);
-    engineCore.createPlayer(0,0);
+    engineCore.createBattlefield();
+    engineCore.createBattlefieldPlayer();
 }
 
 function addToScene(engineCore) {

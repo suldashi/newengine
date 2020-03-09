@@ -26,6 +26,38 @@ class EngineCore {
         });
     }
 
+    createBattlefield() {
+        let xOffset = 480;
+        let yOffset = 252;
+        let panelComponent = new GameObject();
+        for(var i = 0; i < 4; i++) {
+            for(var j = 0; j < 4; j++) {
+                let bodyComponent = this.physics.createPointBodyComponent(i*120 + xOffset, j*72 + yOffset);
+                let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"panel_2");
+                renderComponent.scale = 3;
+                this.renderer.setStaticCamera();
+                panelComponent.attachComponent(bodyComponent);
+                panelComponent.attachComponent(renderComponent);
+                this.activeScene.addGameObject(panelComponent);
+            }
+        }
+        for(var i = 0; i < 4; i++) {
+            for(var j = 0; j < 4; j++) {
+                let bodyComponent = this.physics.createPointBodyComponent(i*120 + 480 + xOffset, j*72 + yOffset);
+                let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"panel_1");
+                renderComponent.scale = 3;
+                this.renderer.setStaticCamera();
+                panelComponent.attachComponent(bodyComponent);
+                panelComponent.attachComponent(renderComponent);
+                this.activeScene.addGameObject(panelComponent);
+            }
+        }
+    }
+
+    createBattlefieldPlayer() {
+
+    }
+
     swapScene() {
         let tmp = this.altScene;
         this.altScene = this.activeScene;
@@ -115,7 +147,7 @@ class EngineCore {
     createFloor(x,y) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"floor_N");
+        let renderComponent = this.renderer.createIsometricStaticRenderComponent(bodyComponent,"floor_N");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
         this.activeScene.addGameObject(staticObject);
@@ -125,7 +157,7 @@ class EngineCore {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
         bodyComponent.height = height;
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"block_N");
+        let renderComponent = this.renderer.createIsometricStaticRenderComponent(bodyComponent,"block_N");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
         this.activeScene.addGameObject(staticObject);
@@ -134,7 +166,7 @@ class EngineCore {
     createMiniBlock(x,y) {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"half_N");
+        let renderComponent = this.renderer.createIsometricStaticRenderComponent(bodyComponent,"half_N");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
         this.activeScene.addGameObject(staticObject);
@@ -144,7 +176,7 @@ class EngineCore {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
         bodyComponent.height = height;
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"slopeHalf_S");
+        let renderComponent = this.renderer.createIsometricStaticRenderComponent(bodyComponent,"slopeHalf_S");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
         this.activeScene.addGameObject(staticObject);
@@ -154,7 +186,7 @@ class EngineCore {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
         bodyComponent.height = height;
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"arrow");
+        let renderComponent = this.renderer.createIsometricStaticRenderComponent(bodyComponent,"arrow");
         eventBus.on("switchOff",() => {
             renderComponent.sprite.play();
         });
@@ -169,7 +201,7 @@ class EngineCore {
     createNPC(x,y) {
         let npc = new GameObject();
         let bodyComponent = this.physics.createBodyComponent(x,y,48,48);
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"npc");
+        let renderComponent = this.renderer.createIsometricStaticRenderComponent(bodyComponent,"npc");
         let colliderComponent = this.collisionSystem.createCollisionComponent(bodyComponent,"npc");
         let scheduler = this.schedulerFactory.createScheduler();
         scheduler.addTask(1000, () => {
@@ -191,7 +223,7 @@ class EngineCore {
         let staticObject = new GameObject();
         let bodyComponent = this.physics.createPointBodyComponent(x,y);
         bodyComponent.height = height;
-        let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"pad");
+        let renderComponent = this.renderer.createIsometricStaticRenderComponent(bodyComponent,"pad");
         staticObject.attachComponent(bodyComponent);
         staticObject.attachComponent(renderComponent);
         this.activeScene.addGameObject(staticObject);

@@ -3,7 +3,7 @@ const PIXI = require("../renderer/pixi");
 
 class ResourceLoader {
     constructor() {
-        this.sheets = ["floor", "player", "npc"],
+        this.sheets = ["floor", "player", "npc", "battlefield"],
         this.resources = {
             animations:{},
             sheets:{},
