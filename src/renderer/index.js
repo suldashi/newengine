@@ -6,6 +6,7 @@ const IsometricPolygonRenderComponent = require("./isometricPolygonRenderCompone
 const IsometricPlayerRenderComponent = require("./isometricPlayerRenderComponent");
 const IsometricStaticRenderComponent = require("./isometricStaticRenderComponent");
 const StaticRenderComponent = require("./staticRenderComponent");
+const BattlefieldRenderComponent = require("./battlefieldRenderComponent");
 const IsometricSwitchRenderComponent = require("./isometricSwitchRenderComponent");
 const ShaderComponent = require("./shaderComponent");
 const TextComponent = require("./textComponent");
@@ -52,6 +53,12 @@ class PixiRenderer {
 
     createStaticRenderComponent(bodyComponent,textureName,height) {
         let renderComponent = new StaticRenderComponent(bodyComponent,this.resources,this.activeScene,textureName,height);
+        this.activeScene.addRenderComponent(renderComponent);
+        return renderComponent;
+    }
+
+    createBattlefieldRenderComponent(battlefieldComponent) {
+        let renderComponent = new BattlefieldRenderComponent(battlefieldComponent,this.resources,this.activeScene);
         this.activeScene.addRenderComponent(renderComponent);
         return renderComponent;
     }

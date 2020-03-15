@@ -27,31 +27,13 @@ class EngineCore {
     }
 
     createBattlefield() {
-        let xOffset = 320;
-        let yOffset = 348;
-        let panelComponent = new GameObject();
-        for(var i = 0; i < 4; i++) {
-            for(var j = 0; j < 4; j++) {
-                let bodyComponent = this.physics.createPointBodyComponent(i*160 + xOffset, j*96 + yOffset);
-                let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"panel_2");
-                renderComponent.scale = 4;
-                this.renderer.setStaticCamera();
-                panelComponent.attachComponent(bodyComponent);
-                panelComponent.attachComponent(renderComponent);
-                this.activeScene.addGameObject(panelComponent);
-            }
-        }
-        for(var i = 0; i < 4; i++) {
-            for(var j = 0; j < 4; j++) {
-                let bodyComponent = this.physics.createPointBodyComponent(i*160 + 640 + xOffset, j*96 + yOffset);
-                let renderComponent = this.renderer.createStaticRenderComponent(bodyComponent,"panel_1");
-                renderComponent.scale = 4;
-                this.renderer.setStaticCamera();
-                panelComponent.attachComponent(bodyComponent);
-                panelComponent.attachComponent(renderComponent);
-                this.activeScene.addGameObject(panelComponent);
-            }
-        }
+        
+        let battlefieldObject = new GameObject();
+        let battlefieldComponent = this.entityFactory.createBattlefieldComponent();
+        let battlefieldRenderComponent = this.renderer.createBattlefieldRenderComponent(battlefieldComponent);
+        battlefieldObject.attachComponent(battlefieldComponent);
+        battlefieldObject.attachComponent(battlefieldRenderComponent);
+        this.renderer.setStaticCamera();
     }
 
     createBattlefieldPlayer() {
