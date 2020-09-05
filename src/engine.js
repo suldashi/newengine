@@ -29,9 +29,9 @@ resourceLoader.loadAllResources().then((resources) => {
 
     window.core = engineCore;
 
-    addToAltScene(engineCore);
-    engineCore.swapScene();
     addToScene(engineCore);
+    engineCore.swapScene();
+    addToAltScene(engineCore);
     engineCore.swapScene();
     MainLoop.setUpdate((delta) => {
         let scaledDelta = delta/1000;

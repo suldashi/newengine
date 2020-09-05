@@ -10,7 +10,7 @@ class StaticRenderComponent extends RenderComponent {
         this.xOffset = 320;
         this.yOffset = 348;
         this.tileXSize = 40*this._scale;
-        this.tileYSize = 28*this._scale;
+        this.tileYSize = 24*this._scale;
         this.i = i;
         this.j = j;
         this.battlefieldTile = battlefieldTile;

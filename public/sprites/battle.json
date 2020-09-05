@@ -1,0 +1,23 @@
+{"frames": {
+
+"battle_1.png":
+{
+	"frame": {"x":1,"y":1,"w":34,"h":44},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":44},
+	"sourceSize": {"w":34,"h":44},
+	"anchor": {"x":0.5,"y":0.5}
+}},
+"animations": {
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "battle.png",
+	"format": "RGBA8888",
+	"size": {"w":36,"h":46},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e0130e2fdd70fdf1a3e82ea7604ed502:364a1651404db7690deef0016862d89d:a24a04ff4d7d4734fe9e4e18b8de1a1c$"
+}
+}
